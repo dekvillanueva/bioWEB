@@ -1,0 +1,75 @@
+<div class="main-container">
+
+  <div class="div-page-title">
+    <h2>Equipos en Taller</h2>
+  </div>
+
+  <div class="div-button-back">
+    <button mat-fab color="primary" aria-label="" (click)="backClicked($event)" class="button-back">
+      <mat-icon>
+        keyboard_backspace
+      </mat-icon>
+    </button>
+  </div>
+  <div class="table-container">
+
+    <div class="div-table-mp">
+
+      <div class="div-label-total">
+        <h4>Total de Equipos en taller: {{totalDeEquipos}} </h4>
+      </div>
+      
+      <mat-form-field appearance="standard">
+        <mat-label>Buscar...</mat-label>
+        <input matInput (keyup)="applyFilterI($event)" placeholder="Tipo de equipo, marca, modelo" #input>
+      </mat-form-field>
+      <!--TABLE EQUIPOS EN TALLER-->
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-mp">
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- TipoET Column -->
+        <ng-container matColumnDef="tipoET">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let element"> {{element.tipoET}} </td>
+        </ng-container>
+
+        <!-- MarcaET Column -->
+        <ng-container matColumnDef="marcaET">
+          <th mat-header-cell *matHeaderCellDef> Marca </th>
+          <td mat-cell *matCellDef="let element"> {{element.marcaET}} </td>
+        </ng-container>
+
+        <!-- ModeloET Column -->
+        <ng-container matColumnDef="modeloET">
+          <th mat-header-cell *matHeaderCellDef> Modelo </th>
+          <td mat-cell *matCellDef="let element"> {{element.modeloET}} </td>
+        </ng-container>
+
+        <!-- SerieET Column -->
+        <ng-container matColumnDef="serieET">
+          <th mat-header-cell *matHeaderCellDef> Nro. Serie </th>
+          <td mat-cell *matCellDef="let element"> {{element.serieET}} </td>
+        </ng-container>
+
+        <!-- ServicioET Column -->
+        <ng-container matColumnDef="servicioET">
+          <th mat-header-cell *matHeaderCellDef> Servicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.servicioET}} </td>
+        </ng-container>
+
+        <!-- DiasET Column -->
+        <ng-container matColumnDef="diasET">
+            <th mat-header-cell *matHeaderCellDef> Días en Taller </th>
+            <td mat-cell *matCellDef="let element"> {{element.diasET}} </td>
+          </ng-container>
+
+      </table>
+    </div>
+  </div>
+
+  <div class="spinner-container" *ngIf="isShowingSpinner">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</div>

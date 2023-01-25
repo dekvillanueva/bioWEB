@@ -1,0 +1,34 @@
+<div style="height: 88vh; width: auto;">
+  <section class="section-botones">
+
+
+
+    <a [routerLink]="['../panel-general']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">PANEL GENERAL</button>
+    </a>
+
+  </section>
+  <section class="section-botones">
+    <a [routerLink]="['../inventarios']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">INVENTARIO</button>
+    </a>
+    <a [routerLink]="['../seguimientos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">SEGUIMIENTOS</button>
+    </a>
+    <a [routerLink]="['../certificados']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">CERTIFICADOS</button>
+    </a>
+  </section>
+  <section class="section-botones">
+    <a [routerLink]="['../equipos-taller']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">EQUIPOS EN TALLER</button>
+    </a>
+    <a [routerLink]="['../historial']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">HISTORIA CLÍNICA</button>
+    </a>
+    <a [routerLink]="['../mantenimientos-preventivos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button class="buttons-main">MANT. PREVENTIVOS</button>
+    </a>
+  </section>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,40 @@
+span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+
+
+.section-botones{
+    display: flex;
+    justify-content: center;
+    max-height: 150px;
+
+    a{
+        margin: 1rem;
+    }
+}
+
+
+
+.buttons-main{
+    background-color: bisque;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    color: #424242;
+    margin: 2%;
+    max-width: 250px;
+    width: 250px;
+    height: 80px;
+}
+
+.buttons-main:hover{
+    background-color: bisque;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    transform: scale(1.1);
+    color: #424242;;
+    margin: 2%;
+    max-width: 250px;
+    width: 250px;
+    height: 80px;
+}
+  

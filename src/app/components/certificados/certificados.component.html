@@ -1,0 +1,76 @@
+<div class="main-container">
+
+  <div class="div-page-title">
+    <h2>Certificados</h2>
+  </div>
+
+  <div class="div-button-back">
+    <button mat-fab color="primary" aria-label="" (click)="backClicked($event)" class="button-back">
+      <mat-icon>
+        keyboard_backspace
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="table-container">
+
+    <div class="div-table-mp">
+
+      <div class="div-label-total">
+        <h4>Total: {{totalCertificables}} </h4>
+        <h4 class="h4-vigentes"> Vigentes: {{totalVigentes}} </h4>
+        <h4 class="h4-pendientes"> Pendientes: {{totalPendientes}} </h4>
+      </div>
+
+      <!--TABLE EQUIPOS EN TALLER-->
+      <mat-form-field appearance="standard">
+        <mat-label>Buscar...</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="servicio" #input>
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-mp">
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Servicio Column -->
+        <ng-container matColumnDef="servicio">
+          <th mat-header-cell *matHeaderCellDef> Servicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.servicio}} </td>
+        </ng-container>
+
+        <!-- Total Column -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+
+        <!-- Certificados Column -->
+        <ng-container matColumnDef="vigentes">
+          <th mat-header-cell *matHeaderCellDef> Vigentes</th>
+          <td mat-cell *matCellDef="let element"> 
+            <a ><span (click)="getVigentes(element)">{{element.vigentes}}</span></a>
+          </td>
+        </ng-container>
+
+        <!-- Pendientes Column -->
+        <ng-container matColumnDef="pendientes">
+          <th mat-header-cell *matHeaderCellDef> Pendientes </th>
+          <td mat-cell *matCellDef="let element"> 
+            <a ><span (click)="getPendientes(element)">{{element.pendientes}}</span></a>
+          </td>
+        </ng-container>
+
+        <!-- Vencimientos Column -->
+        <ng-container matColumnDef="vencimientos">
+          <th mat-header-cell *matHeaderCellDef> Próx. Vencimientos </th>
+          <td mat-cell *matCellDef="let element"> {{element.vencimientos}} </td>
+        </ng-container>
+
+      </table>
+    </div>
+  </div>
+
+  <div class="spinner-container" *ngIf="isShowingSpinner">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</div>

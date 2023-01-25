@@ -1,0 +1,23 @@
+span {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+
+
+.section-botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-height: 150px;
+
+}
+
+.buttons-main{
+    background-color: bisque;
+    margin: 2%;
+    max-width: 250px;
+    width: 250px;
+    height: 80px;
+}
+  

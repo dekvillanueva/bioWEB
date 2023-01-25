@@ -1,0 +1,26 @@
+<div class="main-container">
+
+  <div class="graphics-container">
+    <div class="chart-container div-chart">
+      <canvas id="chart-equipos">
+      </canvas>
+    </div>
+    <div class="chart-container div-chart">
+      <canvas id="chart-certificaciones">
+      </canvas>
+    </div>
+    <div class="chart-container div-chart">
+      <canvas id="chart-equipos-taller">
+      </canvas>
+    </div>
+    <div class="chart-container div-chart">
+      <canvas id="chart-preventivos">
+      </canvas>
+    </div>
+
+    <div class="spinner-container" *ngIf="isShowingSpinner">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+
+  </div>
+</div>

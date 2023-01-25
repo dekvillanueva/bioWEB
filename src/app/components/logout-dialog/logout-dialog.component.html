@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{data.user}}</h2>
+
+<mat-dialog-content>
+  <p> ¿Desea cerrar sesión? </p>
+  <hr>
+</mat-dialog-content>
+
+
+<mat-dialog-actions class="button-container">
+  <button class="mat-raised-button mat-basic dialog-button" (click)="close()">NO</button>
+  <button class="mat-raised-button mat-primary dialog-button" (click)="logout()">SI</button>
+</mat-dialog-actions>

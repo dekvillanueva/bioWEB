@@ -1,0 +1,126 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    .div-page-title {
+      width: auto;
+  
+      h2 {
+        font-size: 1.7rem;
+        color: #424242;
+      }
+    }
+  
+    .div-label-total {
+      display: flex;
+      margin-left: 0.5rem;
+      width: 100%;
+    }
+  
+    .div-button-back {
+      display: flex;
+      width: 100%;
+  
+      .button-back:hover {
+        transform: scale(1.2);
+      }
+  
+    }
+  }
+  
+  .spinner-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .table-container {
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+  
+    .div-table-inventario {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      
+      width: 100%;
+      max-height: 700px;
+      overflow: auto;
+      margin-top: 0.5rem;
+      box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  
+      .table-inventario {
+        width: 100%;
+      }
+    }
+  
+    a {
+      text-decoration: none;
+    }
+  
+    a:hover {
+      transform: scale(1.2);
+      color: #00e5ff;
+    }
+  }
+  
+  h4 {
+    padding-top: 0.55rem;
+    font-size: 1.1rem;
+  }
+  
+  .mat-header-cell {
+    text-align: left;
+    justify-content: center;
+    background: #CFD8DC;
+    font-size: 0.9rem;
+  }
+  
+  .mat-cell {
+    text-align: left;
+    justify-content:center;
+  }
+  
+  mat-label{
+    margin-left: 0.5rem;
+  }
+  
+  input{
+    margin-left: 0.5rem;
+  }
+  
+  .mat-row:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+
+  .example-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .select-width {
+    width: 30%;
+    max-height: 80%;
+    vertical-align: middle;
+  }
+
+  .mat-option {
+    height: 25px;
+    font-size: 0.80rem;
+  }

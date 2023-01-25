@@ -1,0 +1,13 @@
+<div class="toolbar">
+  <div class="toolbar-img">
+    <img class="toolbar-img-logo" src="../assets/img/logoBiotrust.jpg">
+  </div>
+  <div class="toolbar-img"  *ngIf="customerImage">
+    <img class="toolbar-img-logo" src="{{apiUrl + customerImage.image}}">
+  </div>
+  <div class="toolbar-mat-button">
+    <button mat-mini-fab color="primary" [disabled]="!isLogged" (click)="openDialog()">
+      <mat-icon>person</mat-icon>
+    </button>
+  </div>
+</div>

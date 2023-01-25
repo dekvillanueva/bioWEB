@@ -1,0 +1,27 @@
+<div class="login-outer-countainer">
+  <mat-card class="login-inner-countainer">
+    <mat-card-header class="login-title">
+      <mat-card-title>Seleccione un Cliente</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="login-field-container">
+      <!-- <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="submitLoginForm(loginForm.value)" -->
+      <form fxLayout="column wrap" [formGroup]="customerForm" autocomplete="off" novalidate (ngSubmit)="submitCustomerForm(customerForm.value)">
+        <mat-form-field appearance="outline">
+          <mat-label>Clientes</mat-label>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="msCustomers">
+              <mat-option *ngFor="let customer of customers" [value]="customer">
+                {{customer.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasError('msCustomers', 'required')">Por favor seleccione un Cliente</mat-error>
+          </mat-form-field>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="login-btn"
+          [disabled]="!customerForm.valid">
+          Continuar
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

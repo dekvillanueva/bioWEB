@@ -1,0 +1,148 @@
+<div class="main-container">
+
+  <div class="div-page-title">
+    <h2>PANEL GENERAL</h2>
+  </div>
+
+  <div class="div-label-total">
+    <h4>Total inventario: {{totalDevices}}</h4>
+    <a [routerLink]="['../seguimientos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <i class="fas fa-pie-chart"></i>
+    </a>
+  </div>
+
+
+  <div class="table-container">
+
+    <div class="div-table-inventario">
+
+      <!-- <div> -->
+      <a [routerLink]="['../inventarios']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <h4>INVENTARIO</h4>
+      </a>
+      <!-- </div> -->
+      <!--INVENTARIO TABLE-->
+      <table mat-table [dataSource]="dataSourceI" class="mat-elevation-z8 table-inventario" >
+        <tr mat-header-row *matHeaderRowDef= "displayedColumnsI; sticky: true"></tr>
+        <tr mat-row *matRowDef= "let row; columns: displayedColumnsI;"></tr> -->
+        <!-- Servicio Column -->
+        <ng-container matColumnDef="servicio">
+          <th mat-header-cell *matHeaderCellDef>
+            Servicio
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <a [routerLink]="['../inventario-por-servicio', element.servicioId, element.servicio]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{element.servicio}}</a>
+          </td>
+        </ng-container>
+
+        <!-- Inventario Column -->
+        <ng-container matColumnDef="inventario">
+          <th mat-header-cell *matHeaderCellDef>
+            Total
+          </th>
+          <td mat-cell *matCellDef="let element">{{element.inventario}}</td>
+        </ng-container>
+
+        <!-- Taller Column -->
+        <ng-container matColumnDef="taller">
+          <th mat-header-cell *matHeaderCellDef> Taller </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.taller > 0; else noLink">
+              <a ><span (click)="openDialog(element)" matTooltip=
+                "Ver detalle"
+                    matTooltipPosition="below">{{element.taller}}</span></a>
+            </div>
+            <ng-template #noLink>
+             {{element.taller}}
+            </ng-template>
+          </td>
+        </ng-container>
+      </table>
+    </div>
+
+    <div class="div-table-certificaciones">
+      <!-- <div> -->
+      <a [routerLink]="['../certificados']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <h4>CERTIFICACIONES</h4>
+      </a>
+      <!-- </div> -->
+      <!--TABLE CERTIFICACIONES-->
+      <table mat-table [dataSource]="dataSourceC" class="mat-elevation-z8 table-certificaciones">
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsC"></tr>
+        <tr mat-row *matRowDef= "let row; columns: displayedColumnsC;" (click)="selectedRow(row)"></tr>
+
+        <!-- TotalC Column -->
+        <ng-container matColumnDef="totalC">
+          <th mat-header-cell *matHeaderCellDef>
+            Total
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalC}} </td>
+        </ng-container>
+
+        <!-- VigentesC Column -->
+        <ng-container matColumnDef="vigentesC">
+          <th mat-header-cell *matHeaderCellDef>
+            Vigentes
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.vigentesC}} </td>
+        </ng-container>
+
+        <!-- PendientesC Column -->
+        <ng-container matColumnDef="pendientesC">
+          <th mat-header-cell *matHeaderCellDef> Pendientes </th>
+          <td mat-cell *matCellDef="let element"> {{element.pendientesC}} </td>
+        </ng-container>
+
+        <!-- VencimientosC Column -->
+        <ng-container matColumnDef="vencimientosC">
+          <th mat-header-cell *matHeaderCellDef> Próx. Vencimientos </th>
+          <td mat-cell *matCellDef="let element"> {{element.vencimientosC}} </td>
+        </ng-container>
+
+      </table>
+    </div>
+
+    <div class="div-table-mantenimientos-preventivos">
+      <!-- <div> -->
+      <a [routerLink]="['../mantenimientos-preventivos']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <h4>MANTENIMIENTOS PREVENTIVOS</h4>
+      </a>
+      <!-- </div> -->
+      <!--TABLE MANTENIMIENTOS PREVENTIVOS-->
+      <table mat-table [dataSource]="dataSourceMP" class="mat-elevation-z8 table-mantenimientos-preventivos">
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsMP"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsMP;"></tr>
+        <!-- TotalP Column -->
+        <ng-container matColumnDef="totalP">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalP}} </td>
+        </ng-container>
+
+        <!-- VigentesP Column -->
+        <ng-container matColumnDef="vigentesP">
+          <th mat-header-cell *matHeaderCellDef> Vigentes </th>
+          <td mat-cell *matCellDef="let element"> {{element.vigentesP}} </td>
+        </ng-container>
+
+        <!-- PendientesP Column -->
+        <ng-container matColumnDef="pendientesP">
+          <th mat-header-cell *matHeaderCellDef> Pendientes </th>
+          <td mat-cell *matCellDef="let element"> {{element.pendientesP}} </td>
+        </ng-container>
+
+        <!-- VencimientosP Column -->
+        <ng-container matColumnDef="vencimientosP">
+          <th mat-header-cell *matHeaderCellDef> Próx. Vencimientos </th>
+          <td mat-cell *matCellDef="let element"> {{element.vencimientosP}} </td>
+        </ng-container>
+      </table>
+    </div>
+
+    <div class="spinner-container" *ngIf="isShowingSpinner">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </div>
+</div>

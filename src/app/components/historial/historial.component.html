@@ -1,0 +1,71 @@
+<div class="main-container">
+
+  <div class="div-page-title">
+    <h2>HISTORIA CLÍNICA</h2>
+  </div>
+
+  <div class="div-button-back">
+    <button mat-fab color="primary" aria-label="" (click)="backClicked($event)" class="button-back">
+      <mat-icon>
+        keyboard_backspace
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="table-container">
+    <div class="div-table-inventario">
+
+      <form class="example-form">
+
+          <mat-form-field class="select-width">
+            <mat-label>Tipo de Equipo (Seleccionar)</mat-label>
+            <input type="text" matInput [formControl]="myControlT" [matAutocomplete]="autoT">
+            <mat-autocomplete #autoT="matAutocomplete" [displayWith]="displayFnT" (optionSelected)='getTipo($event.option.value)'>
+              <mat-option *ngFor="let optionT of filteredOptionsTipos | async" [value]="optionT">
+                {{optionT.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+
+          <mat-form-field class="select-width">
+            <mat-label>Marca (Seleccionar)</mat-label>
+            <input type="text" matInput [formControl]="myControlM" [matAutocomplete]="autoM">
+            <mat-autocomplete #autoM="matAutocomplete" [displayWith]="displayFnM" (optionSelected)='getMarca($event.option.value)'>
+              <mat-option *ngFor="let optionM of filteredOptionsMarcas | async" [value]="optionM">
+                {{optionM.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+
+          <mat-form-field class="select-width">
+            <mat-label>Modelo (Seleccionar)</mat-label>
+            <input type="text" matInput [formControl]="myControlMo" [matAutocomplete]="autoMo">
+            <mat-autocomplete #autoMo="matAutocomplete" [displayWith]="displayFnMo" (optionSelected)='getModelo($event.option.value)'>
+              <mat-option *ngFor="let optionMo of filteredOptionsModelos | async" [value]="optionMo">
+                {{optionMo.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field class="select-width">
+            <mat-label>Serie (Seleccionar)</mat-label>
+            <input type="text" matInput [formControl]="myControlS" [matAutocomplete]="autoS">
+            <mat-autocomplete #autoS="matAutocomplete" [displayWith]="displayFnS">
+              <mat-option *ngFor="let optionS of filteredOptionsSeries | async" [value]="optionS">
+                {{optionS.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          
+        </form>
+
+    </div>
+    <div class="spinner-container" *ngIf="isShowingSpinner">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </div>
+
+</div>

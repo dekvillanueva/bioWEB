@@ -1,0 +1,341 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .div-page-title {
+    width: auto;
+
+    h2 {
+      font-size: 1.7rem;
+      color: #424242;
+    }
+  }
+
+  .div-label-total {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+    align-items: center;
+
+    h4 {
+      margin-left: 20px;
+      font-size: 1.3rem;
+    }
+
+    a {
+      margin-left: 20px;
+      font-size: 1.8rem;
+      padding-bottom: 0.5rem;
+    }
+
+  }
+
+}
+
+.table-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  position: relative;
+}
+
+.spinner-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-table-inventario {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+  min-width: 350px;
+  background-color: #CFD8DC;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+
+  .table-inventario {
+
+    .mat-column-servicio {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 60% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-inventario {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 20% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-taller {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 20% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    width: 100%;
+    td,
+    th {
+      text-align: left !important;
+      vertical-align: middle !important;
+    }
+
+    white-space: normal;
+    word-wrap: break-word;
+    .mat-sort-header-container {
+      justify-content: center !important;
+    }
+  }
+}
+
+
+.div-table-certificaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+  min-width: 350px;
+  background-color: #9FA8DA;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+
+  .table-certificaciones {
+
+    .mat-column-totalC {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-vigenteC {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-pendienteC {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-vencimientoC {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    width: 100%;
+    td,
+    th {
+      text-align: center !important;
+      vertical-align: middle !important;
+    }
+    white-space: normal;
+    word-wrap: break-word;
+    .mat-sort-header-container {
+      justify-content: center !important;
+    }
+  }
+}
+
+.div-table-mantenimientos-preventivos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+  min-width: 350px;
+  background-color: #81C784;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+
+  .table-mantenimientos-preventivos {
+
+    .mat-column-totalP {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-vigenteP {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-pendienteP {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    .mat-column-vencimientoP {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 8% !important;
+      width: 25% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    
+      word-break: break-word;
+    
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+
+    width: 100%;
+    td,
+    th {
+      text-align: center !important;
+      vertical-align: middle !important;
+    }
+    white-space: normal;
+    word-wrap: break-word;
+
+    .mat-sort-header-container {
+      justify-content: center !important;
+    }
+  }
+}
+
+h4 {
+  display: flex;
+  padding-top: 0.55rem;
+  font-size: 1.1rem;
+}
+
+a {
+  display: flex;
+  text-decoration: none;
+  transition: transform 300ms;
+}
+
+a:hover, a:hover span {
+  transform: scale(1.2);
+  color: #00e5ff;
+  cursor: pointer;
+}
+
+.mat-header-cell {
+  text-align: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  background: #CFD8DC;
+}
+
+.mat-cell {
+  text-align: center;
+  justify-content:center;
+}
