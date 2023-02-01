@@ -28,13 +28,14 @@ export class SelectCustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.userService.getUserCustomers().subscribe({
       next: data => {
         this.resultadoPeticion = data;
         if(this.resultadoPeticion.code == 200){
           this.customers = this.resultadoPeticion.data;
         }else{
-          console.log("Codigo: " + this.resultadoPeticion.code);
+          this.router.navigate(["login"]); //CHECK IF USER IS STILL LOGGED
         }
       },
       error: error =>{

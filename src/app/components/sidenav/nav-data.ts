@@ -38,6 +38,11 @@ export const navbarData = [
         routeLink: "mantenimientos-preventivos",
         icon: "fal fa-cogs",
         label: "Mantenimientos Preventivos"
+    },
+    {
+        routeLink: "select-customer",
+        icon: "fal fa-exchange-alt",
+        label: "Seleccionar Cliente"
     }
 
 ];
