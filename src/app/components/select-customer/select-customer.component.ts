@@ -34,6 +34,7 @@ export class SelectCustomerComponent implements OnInit {
         this.resultadoPeticion = data;
         if(this.resultadoPeticion.code == 200){
           this.customers = this.resultadoPeticion.data;
+        
         }else{
           this.router.navigate(["login"]); //CHECK IF USER IS STILL LOGGED
         }

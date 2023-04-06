@@ -33,7 +33,7 @@ export class MantenimientosPreventivosComponent implements OnInit {
   equiposConMantenimiento: any[] = [];
   datosMantenimientos: MantenimientosPreventivos[] = [];
 
-  totalMP: number;
+  totalMantenimiento: number;
   totalVigentes: number;
   totalPendientes: number;
 
@@ -43,7 +43,7 @@ export class MantenimientosPreventivosComponent implements OnInit {
     
       this.serviceId = ((<any>this.location)._platformLocation.location.href).split("?")[1];
       this.totalDevices = 0;
-      this.totalMP = 0;
+      this.totalMantenimiento = 0;
       this.totalPendientes = 0;
       this.totalVigentes = 0;
   }
@@ -130,7 +130,13 @@ export class MantenimientosPreventivosComponent implements OnInit {
               }
             );
 
+            this.totalMantenimiento =  this.totalMantenimiento + devConMantenimiento;
+            this.totalVigentes = this.totalVigentes + devMantVigentes;
+            this.totalPendientes = this.totalMantenimiento - this.totalVigentes;
+
           }
+
+          console.log(this.datosMantenimientos);
 
           this.dataSourceMP.data = this.datosMantenimientos;
           this.isShowingSpinner = false;

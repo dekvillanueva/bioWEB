@@ -363,6 +363,7 @@ export class CertificadosComponent implements OnInit {
       },
       error: error => {
         console.error(error);
+        this.isShowingSpinner = false;
       }
     });
 

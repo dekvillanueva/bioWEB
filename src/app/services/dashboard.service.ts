@@ -151,6 +151,9 @@ export class DashboardService {
       }
     }
 
+    console.log(this.serviceId + " " + tipoId + " " + marcaId + " " + modeloId);
+
+
 		return this.http.get(API_URL+'equipments/search/serial/customer/'+this.serviceId+
                           '/type/'+tipoId+'/brand/'+marcaId+
                           '/model/'+modeloId, this.config);
@@ -176,6 +179,10 @@ export class DashboardService {
       }
     }
 		return this.http.get(API_URL+'equipments/dashboard/service/'+pid+'/group/types/cert/', this.config);
+	};
+
+  getTracesByEquipment (pid : any) {
+		return this.http.get(API_URL+'equipments/trace/'+pid, this.config);
 	};
 
 }

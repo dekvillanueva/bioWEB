@@ -126,7 +126,6 @@ export class InventarioPorServicioComponent implements OnInit {
           this.resultadoPeticion = data;
           if (this.resultadoPeticion.code == 200) {
             this.devicesByType = this.resultadoPeticion.data;
-            console.log(this.devicesByType);
             this.totalDeEquipos = 0;
             for (let device of this.devicesByType) {
               this.datosInventario.push({
