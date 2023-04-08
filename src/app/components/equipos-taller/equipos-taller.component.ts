@@ -68,7 +68,7 @@ export class EquiposTallerComponent implements OnInit {
 
     //show spinner
     this.isShowingSpinner = true;
-    //list all devices from data base by customerID
+    //list all devices from database by customerID
     this.dashboardService.getUserEquipments().subscribe({
       next: data => {
         this.resultadoPeticion = data;
@@ -116,7 +116,7 @@ export class EquiposTallerComponent implements OnInit {
 
   }
 
-  displayedColumns: string[] = ['tipoET', 'marcaET', 'modeloET', 'serieET', 'servicioET',
+  displayedColumns: string[] = ['fechaET', 'servicioET', 'tipoET', 'serieET', 'servicioET',
     'diasET'];
 
 }

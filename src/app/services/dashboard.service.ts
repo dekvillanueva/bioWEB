@@ -7,6 +7,7 @@ import { DataService } from 'src/app/services/data.service';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -150,10 +151,6 @@ export class DashboardService {
         'CID': this.serviceId
       }
     }
-
-    console.log(this.serviceId + " " + tipoId + " " + marcaId + " " + modeloId);
-
-
 		return this.http.get(API_URL+'equipments/search/serial/customer/'+this.serviceId+
                           '/type/'+tipoId+'/brand/'+marcaId+
                           '/model/'+modeloId, this.config);
@@ -182,6 +179,13 @@ export class DashboardService {
 	};
 
   getTracesByEquipment (pid : any) {
+    this.config = {
+      headers: {
+        'AUTH': this.cookiesService.get("token"),
+        'SID': this.cookiesService.get('uid'),
+        'CID': this.serviceId
+      }
+    }
 		return this.http.get(API_URL+'equipments/trace/'+pid, this.config);
 	};
 

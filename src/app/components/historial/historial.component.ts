@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { LocationStrategy } from '@angular/common';
+import { DatePipe, LocationStrategy } from '@angular/common';
 import { DataService } from 'src/app/services/data.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 import { debounceTime } from "rxjs/operators";
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 export interface TipoDeEquipo {
@@ -38,12 +39,20 @@ export interface SearchOption {
   serialId: number;
 };
 
+export interface Historial {
+  fechaH: string;
+  servicioH: string;
+  tipoH: string;
+}
+
 @Component({
   selector: 'app-historial',
   templateUrl: './historial.component.html',
   styleUrls: ['./historial.component.scss']
 })
 export class HistorialComponent implements OnInit {
+
+  dataSource = new MatTableDataSource<any>();
 
   myControlT: FormControl;
   myControlM: FormControl;
@@ -55,6 +64,8 @@ export class HistorialComponent implements OnInit {
   optionsModelos: Modelo[] = [];
   optionsSeries: Serie[] = [];
   optionsEquipment: SearchOption[] = [];
+
+  datosHistorial: Historial[] = [];
 
   filteredOptionsTipos: Observable<TipoDeEquipo[]>;
   filteredOptionsMarcas: Observable<Marca[]>;
@@ -69,6 +80,7 @@ export class HistorialComponent implements OnInit {
   equiposPorTipo: any;
   equiposFiltrados: any;
   equiposFiltradosModelos: any;
+  historialList: any;
 
 
   tipoSeleccionado: TipoDeEquipo;
@@ -157,6 +169,7 @@ export class HistorialComponent implements OnInit {
 
 
     //list equipos por tipos
+
     this.dashboardService.getEquipmentsByTypeGroup().subscribe({
       next: data => {
         this.resultadoPeticion = data;
@@ -178,6 +191,8 @@ export class HistorialComponent implements OnInit {
     });
 
   }
+
+  displayedColumns: string[] = ['fechaH', 'servicioH', 'tipoH'];
 
   //get tipo de equipo function
   getTipo(tipo: any) {
@@ -289,23 +304,27 @@ export class HistorialComponent implements OnInit {
         modelId: this.modeloSeleccionado.id,
         serialId: 0
       })
-
-      console.log(this.tipoSeleccionado.id + " " + this.marcaSeleccionada.id + " " +this.modeloSeleccionado.id);
-
-      this.dashboardService.getEquipmentSerialsByParameters(this.tipoSeleccionado.id,
+      
+      
+      this.dashboardService.getEquipmentSerialsByParameters(this.sumOne(this.tipoSeleccionado.id),
         this.marcaSeleccionada.id, this.modeloSeleccionado.id).subscribe({
           next: data => {
             this.resultadoPeticion = data;
-
-            console.log(data);
 
             if (this.resultadoPeticion.code == 200) {
 
               this.serieDeEquipos = this.resultadoPeticion.data;
               this.optionsSeries.length = 0;
 
+              
+
               for (let serie of this.serieDeEquipos) {
-                this.optionsSeries.push(serie);
+
+                this.optionsSeries.push({
+                  id: serie.id,
+                  name: serie.name
+                });
+
               }
             }
 
@@ -327,6 +346,61 @@ export class HistorialComponent implements OnInit {
     }
   }
 
+  //select a serial number
+  selectSerial(serial: Serie){
+    if(serial != null){
+      this.serieSeleccionada = serial;
+      this.isShowingSpinner = true;
+      let aux = '*';
+
+      this.dashboardService.getTracesByEquipment(this.serieSeleccionada.id).subscribe({
+          next: data => {
+            this.resultadoPeticion = data;
+
+            if (this.resultadoPeticion.code == 200) {
+              
+              this.historialList = this.resultadoPeticion.data;
+              this.datosHistorial.length = 0;
+
+              for(let dato of this.historialList){
+
+                if(dato.type === "I" ){
+                  aux = "Alta en Sistema";
+                }else if(dato.type === "B"){
+                  aux = "Baja Operativa";
+                }else if(dato.type === "W"){
+                  aux = "Ingreso a Taller";
+                }else if(dato.type === "Z"){
+                  aux = "Egreso de Taller";
+                }else if(dato.type === "M"){
+                  aux = "Mantenimiento";
+                }else if(dato.type === "C"){
+                  aux = "Certificación";
+                }else {
+                  aux = "Preventivo";
+                }
+
+                this.datosHistorial.push(
+                  {
+                    fechaH: dato.date,
+                    servicioH: dato.service,
+                    tipoH: aux
+                  }
+                );
+              }
+            }
+
+            this.isShowingSpinner = false;
+            this.dataSource.data = this.datosHistorial;
+          },
+          error: error => {
+            console.error(error);
+          }
+        });
+      
+    }
+  }
+
   displayFnT(tipo: TipoDeEquipo): string {
     return tipo && tipo.name ? tipo.name : '';
   }
@@ -341,6 +415,13 @@ export class HistorialComponent implements OnInit {
 
   displayFnS(serie: Serie): string {
     return serie && serie.name ? serie.name : '';
+  }
+
+
+
+  private sumOne(num: number): number{
+    console.log(num++);
+    return num++;
   }
 
   private _filterT(name: string): TipoDeEquipo[] {
