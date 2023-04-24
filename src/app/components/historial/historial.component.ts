@@ -316,14 +316,14 @@ export class HistorialComponent implements OnInit {
               this.serieDeEquipos = this.resultadoPeticion.data;
               this.optionsSeries.length = 0;
 
-              
-
               for (let serie of this.serieDeEquipos) {
 
                 this.optionsSeries.push({
                   id: serie.id,
                   name: serie.name
                 });
+
+                console.log(serie.id);
 
               }
             }
@@ -416,8 +416,6 @@ export class HistorialComponent implements OnInit {
   displayFnS(serie: Serie): string {
     return serie && serie.name ? serie.name : '';
   }
-
-
 
   private sumOne(num: number): number{
     console.log(num++);

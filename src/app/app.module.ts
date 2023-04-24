@@ -49,6 +49,7 @@ import { InventarioPorServicioComponent } from './components/inventario-por-serv
 import { DetalleInventarioPorServicioComponent } from './components/detalle-inventario-por-servicio/detalle-inventario-por-servicio.component';
 import { DetalleCertificacionesComponent } from './components/detalle-certificaciones/detalle-certificaciones.component';
 import { DetalleEquiposTallerComponent } from './components/detalle-equipos-taller/detalle-equipos-taller.component';
+import { DetalleMantenimientosPreventivosComponent } from './components/detalle-mantenimientos-preventivos/detalle-mantenimientos-preventivos.component';
 
 
 
@@ -75,7 +76,8 @@ import { DetalleEquiposTallerComponent } from './components/detalle-equipos-tall
     InventarioPorServicioComponent,
     DetalleInventarioPorServicioComponent,
     DetalleCertificacionesComponent,
-    DetalleEquiposTallerComponent
+    DetalleEquiposTallerComponent,
+    DetalleMantenimientosPreventivosComponent
   ],
   imports: [
     BrowserModule,

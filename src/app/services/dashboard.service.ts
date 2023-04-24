@@ -189,4 +189,15 @@ export class DashboardService {
 		return this.http.get(API_URL+'equipments/trace/'+pid, this.config);
 	};
 
+  getDashboardTaller (customer: any) {
+    this.config = {
+      headers: {
+        'AUTH': this.cookiesService.get("token"),
+        'SID': this.cookiesService.get('uid'),
+        'CID': this.serviceId
+      }
+    }
+		return this.http.get("http://104.239.167.69/otrs/index.pl?Action=AgentTicketSearch;Subaction=Search;TakeLastSearch=1;SaveProfile=1;Profile=GUEMES");
+	};
+
 }

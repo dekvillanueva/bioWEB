@@ -28,7 +28,7 @@
         <input matInput (keyup)="applyFilterI($event)" placeholder="servicio" #input>
       </mat-form-field>
     <!--TABLE MANTENIMIENTOS PREVENTIVOS-->
-    <table mat-table [dataSource]="dataSourceMP" class="mat-elevation-z8 table-mp">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-mp">
 
       <tr mat-header-row *matHeaderRowDef="displayedColumnsMP"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsMP;"></tr>
@@ -48,13 +48,17 @@
       <!-- VigentesMP Column -->
       <ng-container matColumnDef="vigentesMP">
         <th mat-header-cell *matHeaderCellDef> Vigentes </th>
-        <td mat-cell *matCellDef="let element"> {{element.vigentesMP}} </td>
+        <td mat-cell *matCellDef="let element"> 
+          <a ><span (click)="getVigentes(element)">{{element.vigentesMP}}</span></a>
+        </td>
       </ng-container>
 
       <!-- PendientesMP Column -->
       <ng-container matColumnDef="pendientesMP">
         <th mat-header-cell *matHeaderCellDef> Pendientes </th>
-        <td mat-cell *matCellDef="let element"> {{element.pendientesMP}} </td>
+        <td mat-cell *matCellDef="let element"> 
+          <a ><span (click)="getPendientes(element)">{{element.pendientesMP}}</span></a>
+        </td>
       </ng-container>
 
       <!-- VencimientosMP Column -->

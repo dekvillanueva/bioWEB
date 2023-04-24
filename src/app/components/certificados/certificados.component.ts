@@ -75,7 +75,6 @@ export class CertificadosComponent implements OnInit {
 
   }
 
-
   backClicked(event: Event) {
     this.location.back();
   }
@@ -122,8 +121,6 @@ export class CertificadosComponent implements OnInit {
               certificado: eq.idCertificados
 
             });
-
-
           }
         }
 
@@ -137,13 +134,11 @@ export class CertificadosComponent implements OnInit {
 
         this.isShowingSpinner = false;
 
-
       },
       error: error => {
         console.error(error);
       }
     });
-
   }
 
   getPendientes(servicio: any) {
@@ -162,7 +157,6 @@ export class CertificadosComponent implements OnInit {
             this.equiposPorRiesgoArr.push(e);
           }
         }
-
 
         for (let eq of this.equiposCertificablesNoVigentes) {
           let riesgo;
@@ -191,7 +185,6 @@ export class CertificadosComponent implements OnInit {
               certificado: eq.idCertificados
 
             });
-
           }
         }
 
@@ -199,7 +192,6 @@ export class CertificadosComponent implements OnInit {
           var x = a.riesgo > b.riesgo ? -1 : 1;
           return x;
         });
-
 
         this.dataSourceDC.data = this.datosCertificacionesNoVigentes;
         this.openDialog(this.dataSourceDC.data);
@@ -228,7 +220,6 @@ export class CertificadosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
 
     //CHECK IF USER IS STILL LOGGED
     this.userService.getUserCustomers()
@@ -314,16 +305,7 @@ export class CertificadosComponent implements OnInit {
                   } else {
                     this.equiposCertificablesNoVigentes.push(this.equiposCertificables[i]);
                   }
-
                 }
-
-                // //certificaciones NO vigentes
-                // if(this.equiposCertificables[i].certificate_expiration_date < this.equiposCertificables[i].now
-                //     || this.equiposCertificables[i].certificate_expiration_date_elec < this.equiposCertificables[i].now){
-
-                //       this.equiposCertificablesNoVigentes.push(this.equiposCertificables[i]);
-
-                // }
 
                 //próximos vencimientos
                 if (this.equiposCertificables[i].certificate_expiration_date != null &&
@@ -334,7 +316,6 @@ export class CertificadosComponent implements OnInit {
                     devCertPorVencer = devCertPorVencer + 1;
                   }
                 }
-
               }
             }
 
@@ -350,9 +331,7 @@ export class CertificadosComponent implements OnInit {
                 vencimientos: devCertPorVencer
               }
             );
-
           }
-
 
           this.dataSource.data = this.datosCertificaciones;
           this.isShowingSpinner = false;

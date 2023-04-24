@@ -109,3 +109,9 @@ mat-label{
   align-items: center;
   justify-content: center;
 }
+
+a:hover, a:hover span {
+  transform: scale(1.2);
+  color: #00e5ff;
+  cursor: pointer;
+}

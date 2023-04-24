@@ -72,9 +72,22 @@ export class EquiposTallerComponent implements OnInit {
     this.dashboardService.getUserEquipments().subscribe({
       next: data => {
         this.resultadoPeticion = data;
+
         if (this.resultadoPeticion.code == 200) {
           this.userEquipments = this.resultadoPeticion.data;
           this.equiposTaller.length = 0;
+
+          this.dashboardService.getDashboardTaller(this.resultadoPeticion.data[0].code).subscribe({
+
+            next: data => {
+              console.log(data);
+              console.log("este")
+            },
+            error: error => {
+              console.error(error);
+            }
+
+          });
 
           for (let equipment of this.userEquipments) {
 
