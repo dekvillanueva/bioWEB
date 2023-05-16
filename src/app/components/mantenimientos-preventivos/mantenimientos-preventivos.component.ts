@@ -148,6 +148,7 @@ export class MantenimientosPreventivosComponent implements OnInit {
                   let diff = differenceInDays(this.equiposConMantenimiento[i].now, this.equiposConMantenimiento[i].maintenance_date);
                   if (diff > 0 && diff <= 30) {
                     devMantPorVencer = devMantPorVencer + 1;
+                    
                   }
                 }
               }
@@ -169,6 +170,8 @@ export class MantenimientosPreventivosComponent implements OnInit {
             this.totalPendientes = this.totalMantenimiento - this.totalVigentes;
 
           }
+
+          this.datosMantenimientos = this.datosMantenimientos.filter(servicio => servicio.totalMP > 0);
 
           this.dataSource.data = this.datosMantenimientos;
           this.isShowingSpinner = false;
@@ -212,6 +215,7 @@ export class MantenimientosPreventivosComponent implements OnInit {
             riesgo = '';
             //datos para agregar la clase de riesgo
             for (let dev of this.equiposPorRiesgoArr) {
+
               if (eq.equipment.includes(dev.name)) {
                 riesgo = dev.class;
                 break;
@@ -220,7 +224,7 @@ export class MantenimientosPreventivosComponent implements OnInit {
 
             this.eqMPVigPorServicio.push(eq);
 
-             this.datosMantenimientosVigentes.push({
+            this.datosMantenimientosVigentes.push({
               riesgo: riesgo,
               servicioId: eq.services_id,
               servicio: eq.service,

@@ -4,10 +4,6 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { LocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 
-export interface Servicio {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-pie-chart',
@@ -45,13 +41,9 @@ export class PieChartComponent implements OnInit {
 
   }
 
-  servicios: Servicio[] = [
-    { value: 'UTI-0', viewValue: 'UTI' },
-    { value: 'Neonatología-1', viewValue: 'NEONATOLOGIA' },
-    { value: 'Quirófano-2', viewValue: 'QUIRÓFANO' },
-  ];
 
   createChart(etiquetas: string[], datos: number[], titulo: string, id: string): void {
+
     Chart.register(...registerables);
     const data = {
       labels: etiquetas,
@@ -88,7 +80,20 @@ export class PieChartComponent implements OnInit {
             size: 18
           }
         }
+      },
+      'onClick': (evt: any, items: any) => {
+          
+        if (items) {
+          if (evt.chart.config._config.options.plugins.title.text === "Mant. Preventivos") {
+            this.router.navigate(["mantenimientos-preventivos"]);
+          } else if (evt.chart.config._config.options.plugins.title.text === "Certificaciones") {
+            this.router.navigate(["certificados"]);
+          }
+
+        }
+
       }
+
     }
 
     const config: ChartConfiguration = {
@@ -97,8 +102,13 @@ export class PieChartComponent implements OnInit {
       options: options
     }
 
-    const chartItemEquipos: ChartItem = document.getElementById(id) as ChartItem
-    new Chart(chartItemEquipos, config);
+    
+    const chartItemEquipos: ChartItem = document.getElementById(id) as ChartItem;
+    let pieChart = new Chart(chartItemEquipos, config);
+
+  }
+
+  showMatPreventivos(): void{
 
   }
 
@@ -299,7 +309,7 @@ export class PieChartComponent implements OnInit {
                   this.createChart(etiquetas[i], datos[i], titulos[i], ids[i]);
                 }
 
-              } else if(this.resultadoPeticion.code == 403){
+              } else if (this.resultadoPeticion.code == 403) {
                 this.router.navigate(["login"])
               }
             },
@@ -309,7 +319,7 @@ export class PieChartComponent implements OnInit {
 
           });
 
-        } else if(this.resultadoPeticion.code == 403){
+        } else if (this.resultadoPeticion.code == 403) {
           this.router.navigate(["login"])
         }
         this.isShowingSpinner = false;

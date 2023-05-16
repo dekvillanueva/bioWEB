@@ -333,6 +333,8 @@ export class CertificadosComponent implements OnInit {
             );
           }
 
+          this.datosCertificaciones = this.datosCertificaciones.filter(servicio => servicio.total > 0);
+
           this.dataSource.data = this.datosCertificaciones;
           this.isShowingSpinner = false;
 

@@ -143,8 +143,6 @@ export class PanelGeneralComponent implements OnInit {
           this.services = this.resultadoPeticion.data;
           this.equipmentsArr = this.resultadoPeticion.detail;
 
-          console.log(this.equipmentsArr);
-
           //get devices in taller
           for (let device of this.equipmentsArr) {
             if (parseInt(device.workshop) > 0) {

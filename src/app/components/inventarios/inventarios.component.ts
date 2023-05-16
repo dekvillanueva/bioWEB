@@ -171,6 +171,8 @@ export class InventariosComponent implements OnInit {
             })
             this.totalDeEquipos = this.totalDeEquipos + parseInt(device.count);
           }
+
+          console.log(this.datosInventario);
           this.dataSourceI.data = this.datosInventario;
           this.isShowingSpinner = false;
         }
