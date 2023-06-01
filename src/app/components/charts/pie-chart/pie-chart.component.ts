@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'node_modules/chart.js';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { LocationStrategy } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DetalleEquiposEnTallerComponent } from '../../detalle-equipos-en-taller/detalle-equipos-en-taller.component';
 
+
+export interface DetalleEquiposTaller {
+  tipo: string;
+  marca: string;
+  modelo: string;
+  serie: string;
+  servicio: string;
+}
 
 @Component({
   selector: 'app-pie-chart',
@@ -23,15 +34,24 @@ export class PieChartComponent implements OnInit {
   equiposCertificablesVigentes: any[] = [];
   equiposCertificablesNoVigentes: any[] = [];
 
+  datosDetalleEquiposTallerMasCienDias: DetalleEquiposTaller[] = [];
+  datosDetalleEquiposTallerMenosCienDias: DetalleEquiposTaller[] = [];
+
+  dataSourceDETMasCienDias = new MatTableDataSource<any>();
+  dataSourceDETMenosCienDias = new MatTableDataSource<any>();
+
   totalCertificables: number;
   totalVigentes: number;
   totalPendientes: number;
 
   userEquipments: any;
   equiposTaller: any[] = [];
+  equiposTallerMasCienDias: any[] = [];
+  equiposTallerMenosCienDias: any[] = [];
   equiposConMantenimiento: any[] = [];
 
-  constructor(private dashboardService: DashboardService, private location: LocationStrategy, private router: Router) {
+  constructor(private dashboardService: DashboardService, private location: LocationStrategy,
+     private router: Router, public dialog: MatDialog) {
 
     this.serviceId = ((<any>this.location)._platformLocation.location.href).split("?")[1];
 
@@ -88,12 +108,13 @@ export class PieChartComponent implements OnInit {
             this.router.navigate(["mantenimientos-preventivos"]);
           } else if (evt.chart.config._config.options.plugins.title.text === "Certificaciones") {
             this.router.navigate(["certificados"]);
+          } else if(evt.chart.config._config.data.labels[items[0].index] === "Menor a 100 días"){
+            this.openDialog(this.dataSourceDETMenosCienDias.data);
+          }else if(evt.chart.config._config.data.labels[items[0].index] === "Mayor a 100 días"){
+            this.openDialog(this.dataSourceDETMasCienDias.data);
           }
-
         }
-
       }
-
     }
 
     const config: ChartConfiguration = {
@@ -249,6 +270,12 @@ export class PieChartComponent implements OnInit {
               if (this.resultadoPeticion.code == 200) {
                 this.userEquipments = this.resultadoPeticion.data;
                 this.equiposTaller.length = 0;
+                this.equiposTallerMenosCienDias.length = 0;
+                this.equiposTallerMasCienDias.length = 0;
+                this.datosDetalleEquiposTallerMasCienDias.length = 0;
+                this.datosDetalleEquiposTallerMenosCienDias.length = 0;
+                this.dataSourceDETMasCienDias.data.length = 0;
+                this.dataSourceDETMenosCienDias.data.length = 0;
 
                 for (let equipment of this.userEquipments) {
 
@@ -258,12 +285,33 @@ export class PieChartComponent implements OnInit {
 
                     if (diff >= 100) {
                       mayor100Dias++;
+                      this.equiposTallerMasCienDias.push(equipment);
+
+                      this.datosDetalleEquiposTallerMasCienDias.push({
+                        tipo: equipment.type,
+                        marca: equipment.brand,
+                        modelo: equipment.model,
+                        serie: equipment.serial,
+                        servicio: equipment.service
+                      });
                     } else {
                       menor100Dias++;
+                      this.equiposTallerMenosCienDias.push(equipment);
+
+                      this.datosDetalleEquiposTallerMenosCienDias.push({
+                        tipo: equipment.type,
+                        marca: equipment.brand,
+                        modelo: equipment.model,
+                        serie: equipment.serial,
+                        servicio: equipment.service
+                      });
                     }
 
                   }
                 }
+
+                this.dataSourceDETMasCienDias.data = this.datosDetalleEquiposTallerMasCienDias;
+                this.dataSourceDETMenosCienDias.data = this.datosDetalleEquiposTallerMenosCienDias;
 
                 let etiquetasEquipos = ["Propio", "Alquilado", "Comodato", "otros"];
                 let datosEquipos = [propio, alquilado, comodato, otros];
@@ -329,6 +377,14 @@ export class PieChartComponent implements OnInit {
       }
     });
   }
+
+  openDialog(datos: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = datos;
+  
+    this.dialog.open(DetalleEquiposEnTallerComponent, dialogConfig);
+  }
+
 }
 
 function differenceInDays(firstdate: String, seconddate: String) {

@@ -2,12 +2,12 @@
   <div class="toolbar-img">
     <img class="toolbar-img-logo" src="../assets/img/logoBiotrust.jpg">
   </div>
-  <div class="toolbar-img"  *ngIf="customerImage; else templateName">
+  <!-- <div class="toolbar-img"  *ngIf="customerImage">
     <img class="toolbar-img-logo" src="{{apiUrl + customerImage.image}}">
-  </div>
-  <ng-template #templateName>
+  </div> -->
+  <div class="toolbar-img"  *ngIf="customerImage && customerImage.id == 34">
     <img class="toolbar-img-logo" src="../assets/img/LogoMaterDei.png">
-  </ng-template>
+  </div>
   <div class="toolbar-mat-button">
     <button mat-mini-fab color="primary" [disabled]="!isLogged" (click)="openDialog()">
       <mat-icon>person</mat-icon>

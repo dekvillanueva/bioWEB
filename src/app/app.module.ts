@@ -50,6 +50,7 @@ import { DetalleInventarioPorServicioComponent } from './components/detalle-inve
 import { DetalleCertificacionesComponent } from './components/detalle-certificaciones/detalle-certificaciones.component';
 import { DetalleEquiposTallerComponent } from './components/detalle-equipos-taller/detalle-equipos-taller.component';
 import { DetalleMantenimientosPreventivosComponent } from './components/detalle-mantenimientos-preventivos/detalle-mantenimientos-preventivos.component';
+import { DetalleEquiposEnTallerComponent } from './components/detalle-equipos-en-taller/detalle-equipos-en-taller.component';
 
 
 
@@ -77,7 +78,8 @@ import { DetalleMantenimientosPreventivosComponent } from './components/detalle-
     DetalleInventarioPorServicioComponent,
     DetalleCertificacionesComponent,
     DetalleEquiposTallerComponent,
-    DetalleMantenimientosPreventivosComponent
+    DetalleMantenimientosPreventivosComponent,
+    DetalleEquiposEnTallerComponent
   ],
   imports: [
     BrowserModule,
