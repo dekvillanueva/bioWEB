@@ -1,0 +1,34 @@
+<div mat-dialog-content class="mat-dialog-content">
+    <!--DETALLE EQUIPOS EN GRAFICO INVENTARIO TABLE-->
+    <div class="div-label-total">
+      <h4 mat-dialog-title>&nbsp;&nbsp;Total de Equipos: {{cantidadDeEquipos}} </h4>
+    </div>
+  
+    <div class="div-table-inventario">
+  
+      <mat-form-field appearance="standard" class="filter-field">
+        <mat-label>Buscar...</mat-label>
+        <input matInput (keyup)="applyFilterEE($event)" placeholder="marca, modelo, tipo" #input>
+      </mat-form-field>
+  
+      <table mat-table [dataSource]="dataSourceDEE" class="mat-elevation-z8 table-inventario">
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsDI; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsDI;"></tr>
+  
+         <!-- Equipo Column -->
+         <ng-container matColumnDef="equipo">
+            <th mat-header-cell *matHeaderCellDef> Equipo </th>
+            <td mat-cell *matCellDef="let element"> {{element.equipo}} </td>
+          </ng-container>
+        
+        <!-- Servicio Column -->
+        <ng-container matColumnDef="servicio">
+          <th mat-header-cell *matHeaderCellDef> Servicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.servicio}} </td>
+        </ng-container>
+  
+      </table>
+    </div>
+  </div>
+  

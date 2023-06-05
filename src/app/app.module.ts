@@ -51,6 +51,7 @@ import { DetalleCertificacionesComponent } from './components/detalle-certificac
 import { DetalleEquiposTallerComponent } from './components/detalle-equipos-taller/detalle-equipos-taller.component';
 import { DetalleMantenimientosPreventivosComponent } from './components/detalle-mantenimientos-preventivos/detalle-mantenimientos-preventivos.component';
 import { DetalleEquiposEnTallerComponent } from './components/detalle-equipos-en-taller/detalle-equipos-en-taller.component';
+import { DetalleEquiposEnInventarioComponent } from './components/detalle-equipos-en-inventario/detalle-equipos-en-inventario.component';
 
 
 
@@ -79,7 +80,8 @@ import { DetalleEquiposEnTallerComponent } from './components/detalle-equipos-en
     DetalleCertificacionesComponent,
     DetalleEquiposTallerComponent,
     DetalleMantenimientosPreventivosComponent,
-    DetalleEquiposEnTallerComponent
+    DetalleEquiposEnTallerComponent,
+    DetalleEquiposEnInventarioComponent
   ],
   imports: [
     BrowserModule,

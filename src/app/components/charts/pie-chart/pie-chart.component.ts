@@ -6,6 +6,7 @@ import { LocationStrategy } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DetalleEquiposEnTallerComponent } from '../../detalle-equipos-en-taller/detalle-equipos-en-taller.component';
+import { DetalleEquiposEnInventarioComponent } from '../../detalle-equipos-en-inventario/detalle-equipos-en-inventario.component';
 
 
 export interface DetalleEquiposTaller {
@@ -14,6 +15,11 @@ export interface DetalleEquiposTaller {
   modelo: string;
   serie: string;
   servicio: string;
+}
+
+export interface DetalleEquiposElectromedicos {
+  equipo: string;
+  servicio: string
 }
 
 @Component({
@@ -37,8 +43,18 @@ export class PieChartComponent implements OnInit {
   datosDetalleEquiposTallerMasCienDias: DetalleEquiposTaller[] = [];
   datosDetalleEquiposTallerMenosCienDias: DetalleEquiposTaller[] = [];
 
+  datosDetalleEquiposElectromedicosPropios: DetalleEquiposElectromedicos[] = [];
+  datosDetalleEquiposElectromedicosAlquilados: DetalleEquiposElectromedicos[] = [];
+  datosDetalleEquiposElectromedicosComodatos: DetalleEquiposElectromedicos[] = [];
+  datosDetalleEquiposElectromedicosOtros: DetalleEquiposElectromedicos[] = [];
+
   dataSourceDETMasCienDias = new MatTableDataSource<any>();
   dataSourceDETMenosCienDias = new MatTableDataSource<any>();
+
+  dataSourceDEEPropios = new MatTableDataSource<any>();
+  dataSourceDEEAlquilados = new MatTableDataSource<any>();
+  dataSourceDEEComodato = new MatTableDataSource<any>();
+  dataSourceDEEOtros = new MatTableDataSource<any>();
 
   totalCertificables: number;
   totalVigentes: number;
@@ -48,6 +64,10 @@ export class PieChartComponent implements OnInit {
   equiposTaller: any[] = [];
   equiposTallerMasCienDias: any[] = [];
   equiposTallerMenosCienDias: any[] = [];
+  equiposElectromedicosPropios: any[] = [];
+  equiposElectromedicosAlquilados: any[] = [];
+  equiposElectromedicosComodato: any[] = [];
+  equiposElectromedicosOtros: any[] = [];
   equiposConMantenimiento: any[] = [];
 
   constructor(private dashboardService: DashboardService, private location: LocationStrategy,
@@ -109,9 +129,17 @@ export class PieChartComponent implements OnInit {
           } else if (evt.chart.config._config.options.plugins.title.text === "Certificaciones") {
             this.router.navigate(["certificados"]);
           } else if(evt.chart.config._config.data.labels[items[0].index] === "Menor a 100 días"){
-            this.openDialog(this.dataSourceDETMenosCienDias.data);
+            this.openDialog(this.dataSourceDETMenosCienDias.data, "EquiposEnTaller");
           }else if(evt.chart.config._config.data.labels[items[0].index] === "Mayor a 100 días"){
-            this.openDialog(this.dataSourceDETMasCienDias.data);
+            this.openDialog(this.dataSourceDETMasCienDias.data, "EquiposEnTaller");
+          }else if(evt.chart.config._config.data.labels[items[0].index] === "Propio"){
+            this.openDialog(this.dataSourceDEEPropios.data, "Inventario");
+          }else if(evt.chart.config._config.data.labels[items[0].index] === "Alquilado"){
+            this.openDialog(this.dataSourceDEEAlquilados.data, "Inventario");
+          }else if(evt.chart.config._config.data.labels[items[0].index] === "Comodato"){
+            this.openDialog(this.dataSourceDEEComodato.data, "Inventario");
+          }else if(evt.chart.config._config.data.labels[items[0].index] === "Otros"){
+            this.openDialog(this.dataSourceDEEOtros.data, "Inventario");
           }
         }
       }
@@ -165,14 +193,44 @@ export class PieChartComponent implements OnInit {
           let devMantVigentes = 0;
           let devMantPorVencer = 0;
 
+          this.equiposElectromedicosPropios.length = 0;
+          this.equiposElectromedicosAlquilados.length = 0;
+          this.equiposElectromedicosComodato.length = 0;
+          this.equiposElectromedicosOtros.length = 0;
+
+          this.dataSourceDEEPropios.data.length = 0;
+          this.dataSourceDEEAlquilados.data.length = 0;
+          this.dataSourceDEEComodato.data.length = 0;
+          this.dataSourceDEEOtros.data.length = 0;
+
           for (let equipo of this.equipmentsArr) {
             if (equipo.propio.includes('Propio')) {
+              this.equiposElectromedicosPropios.push(equipo);
+              this.dataSourceDEEPropios.data.push({
+                equipo: equipo.equipment,
+                servicio: equipo.service
+              })
               propio++;
             } else if (equipo.propio.includes('Alquilado')) {
+              this.equiposElectromedicosAlquilados.push(equipo);
+              this.dataSourceDEEAlquilados.data.push({
+                equipo: equipo.equipment,
+                servicio: equipo.service
+              })
               alquilado++;
             } else if (equipo.propio.includes('Comodato')) {
+              this.equiposElectromedicosComodato.push(equipo);
+              this.dataSourceDEEComodato.data.push({
+                equipo: equipo.equipment,
+                servicio: equipo.service
+              })
               comodato++;
             } else {
+              this.equiposElectromedicosOtros.push(equipo);
+              this.dataSourceDEEOtros.data.push({
+                equipo: equipo.equipment,
+                servicio: equipo.servicie
+              })
               otros++
             }
 
@@ -313,7 +371,7 @@ export class PieChartComponent implements OnInit {
                 this.dataSourceDETMasCienDias.data = this.datosDetalleEquiposTallerMasCienDias;
                 this.dataSourceDETMenosCienDias.data = this.datosDetalleEquiposTallerMenosCienDias;
 
-                let etiquetasEquipos = ["Propio", "Alquilado", "Comodato", "otros"];
+                let etiquetasEquipos = ["Propio", "Alquilado", "Comodato", "Otros"];
                 let datosEquipos = [propio, alquilado, comodato, otros];
                 let tituloEquipos = "Total Equipos Electromédicos";
                 let idEquipos = "chart-equipos";
@@ -378,11 +436,16 @@ export class PieChartComponent implements OnInit {
     });
   }
 
-  openDialog(datos: any) {
+  openDialog(datos: any, tipo: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = datos;
   
-    this.dialog.open(DetalleEquiposEnTallerComponent, dialogConfig);
+    if(tipo === "EquiposEnTaller"){
+      this.dialog.open(DetalleEquiposEnTallerComponent, dialogConfig);
+    }else{
+      this.dialog.open(DetalleEquiposEnInventarioComponent, dialogConfig);
+    }
+    
   }
 
 }
