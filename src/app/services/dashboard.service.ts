@@ -200,4 +200,14 @@ export class DashboardService {
 		return this.http.get("http://104.239.167.69/otrs/index.pl?Action=AgentTicketSearch;Subaction=Search;TakeLastSearch=1;SaveProfile=1;Profile=GUEMES");
 	};
 
+  /**
+   * Get tickets from OTRS by customer, ticket_state_id=4,
+	 * type_id=17 (Abono Correctivo) and
+	 * type_id=8 (Reparación)
+   * @param customer is an CUSTOMER name in uppercase
+   */
+  getTicketsByCustomer(customer: any){
+    return this.http.get("http://104.239.167.69/otrs-web/biotrust/api/v1/nico/getTicketsByCustomer.php/?customerID="+ customer);
+  }
+
 }
