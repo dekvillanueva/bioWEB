@@ -69,7 +69,7 @@ export class EquiposTallerComponent implements OnInit {
       }
     });
 
-    //NOTIFICA SI HAY USUARIO
+    //NOTIFICA SI HAY USUARIO LOGGEADO
     this.dataService.getCustomerNotifier().subscribe((value: Object) => {
       if (value!=-1) {
         this.customer = value;
@@ -97,8 +97,7 @@ export class EquiposTallerComponent implements OnInit {
             });
 
             for(let ticket of this.customerTickets){
-
-              this.equiposTaller.push(ticket);
+              this.equiposTaller.push(ticket); 
               let diff = differenceInDays(ticket.create_time, ticket.now);
 
               this.datosEquiposTaller.push({

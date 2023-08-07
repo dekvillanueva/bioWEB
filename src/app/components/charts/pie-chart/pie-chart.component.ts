@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'node_modules/chart.js';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { DataService } from 'src/app/services/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { LocationStrategy } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -10,11 +11,12 @@ import { DetalleEquiposEnInventarioComponent } from '../../detalle-equipos-en-in
 
 
 export interface DetalleEquiposTaller {
-  tipo: string;
-  marca: string;
-  modelo: string;
-  serie: string;
-  servicio: string;
+  fechaET: string;
+  equipoET: string;
+  servicioET: string;
+  estadoET: string;
+  diasET: number;
+  fallaET: string;
 }
 
 export interface DetalleEquiposElectromedicos {
@@ -33,6 +35,8 @@ export class PieChartComponent implements OnInit {
   serviceId: any;
   equipmentsArr: any;
   resultadoPeticion: any;
+  customer: any;
+  customerTickets: any;
 
   isShowingSpinner = false;
 
@@ -70,8 +74,9 @@ export class PieChartComponent implements OnInit {
   equiposElectromedicosOtros: any[] = [];
   equiposConMantenimiento: any[] = [];
 
+
   constructor(private dashboardService: DashboardService, private location: LocationStrategy,
-     private router: Router, public dialog: MatDialog) {
+    private router: Router, public dialog: MatDialog, private dataService: DataService) {
 
     this.serviceId = ((<any>this.location)._platformLocation.location.href).split("?")[1];
 
@@ -122,23 +127,23 @@ export class PieChartComponent implements OnInit {
         }
       },
       'onClick': (evt: any, items: any) => {
-          
+
         if (items) {
           if (evt.chart.config._config.options.plugins.title.text === "Mant. Preventivos") {
             this.router.navigate(["mantenimientos-preventivos"]);
           } else if (evt.chart.config._config.options.plugins.title.text === "Certificaciones") {
             this.router.navigate(["certificados"]);
-          } else if(evt.chart.config._config.data.labels[items[0].index] === "Menor a 100 días"){
+          } else if (evt.chart.config._config.data.labels[items[0].index] === "Menor a 100 días") {
             this.openDialog(this.dataSourceDETMenosCienDias.data, "EquiposEnTaller");
-          }else if(evt.chart.config._config.data.labels[items[0].index] === "Mayor a 100 días"){
+          } else if (evt.chart.config._config.data.labels[items[0].index] === "Mayor a 100 días") {
             this.openDialog(this.dataSourceDETMasCienDias.data, "EquiposEnTaller");
-          }else if(evt.chart.config._config.data.labels[items[0].index] === "Propio"){
+          } else if (evt.chart.config._config.data.labels[items[0].index] === "Propio") {
             this.openDialog(this.dataSourceDEEPropios.data, "Inventario");
-          }else if(evt.chart.config._config.data.labels[items[0].index] === "Alquilado"){
+          } else if (evt.chart.config._config.data.labels[items[0].index] === "Alquilado") {
             this.openDialog(this.dataSourceDEEAlquilados.data, "Inventario");
-          }else if(evt.chart.config._config.data.labels[items[0].index] === "Comodato"){
+          } else if (evt.chart.config._config.data.labels[items[0].index] === "Comodato") {
             this.openDialog(this.dataSourceDEEComodato.data, "Inventario");
-          }else if(evt.chart.config._config.data.labels[items[0].index] === "Otros"){
+          } else if (evt.chart.config._config.data.labels[items[0].index] === "Otros") {
             this.openDialog(this.dataSourceDEEOtros.data, "Inventario");
           }
         }
@@ -151,13 +156,13 @@ export class PieChartComponent implements OnInit {
       options: options
     }
 
-    
+
     const chartItemEquipos: ChartItem = document.getElementById(id) as ChartItem;
     let pieChart = new Chart(chartItemEquipos, config);
 
   }
 
-  showMatPreventivos(): void{
+  showMatPreventivos(): void {
 
   }
 
@@ -322,109 +327,167 @@ export class PieChartComponent implements OnInit {
 
           }
 
-          this.dashboardService.getUserEquipments().subscribe({
-            next: data => {
-              this.resultadoPeticion = data;
-              if (this.resultadoPeticion.code == 200) {
-                this.userEquipments = this.resultadoPeticion.data;
-                this.equiposTaller.length = 0;
-                this.equiposTallerMenosCienDias.length = 0;
-                this.equiposTallerMasCienDias.length = 0;
-                this.datosDetalleEquiposTallerMasCienDias.length = 0;
-                this.datosDetalleEquiposTallerMenosCienDias.length = 0;
-                this.dataSourceDETMasCienDias.data.length = 0;
-                this.dataSourceDETMenosCienDias.data.length = 0;
+          //PARA EQUIPOS EN TALLER
 
-                for (let equipment of this.userEquipments) {
+          //NOTIFICA SI HAY USUARIO LOGGEADO
+          this.dataService.getCustomerNotifier().subscribe((value: Object) => {
+            if (value != -1) {
+              this.customer = value;
+            } else {
+              this.customer = null;
+            }
+          });
 
-                  if (parseInt(equipment.workshop) > 0) {
-                    this.equiposTaller.push(equipment);
-                    let diff = differenceInDays(equipment.workshop_date, equipment.now);
+          //list all tickets from OTRS by customerID
+
+          //     next: data => {
+          //       this.resultadoPeticion = data;
+          //       if (this.resultadoPeticion.code == 200) {
+          //         this.customerTickets = this.resultadoPeticion.data;
+          //         this.equiposTaller.length = 0;
+
+          //         this.customerTickets = this.customerTickets.filter((ti: any) => {
+          //           return !ti.equipo.includes("ERROR");
+          //         });
+
+          //         for (let ticket of this.customerTickets) {
+
+          //           this.equiposTaller.push(ticket);
+          //           let diff = differenceInDays(ticket.create_time, ticket.now);
+
+          //           this.datosEquiposTaller.push({
+          //             fechaET: ticket.create_time,
+          //             equipoET: ticket.equipo,
+          //             servicioET: ticket.servicio,
+          //             estadoET: ticket.estado,
+          //             diasET: diff,
+          //             fallaET: ticket.falla
+          //           })
+          //         }
+
+          //         this.totalDeEquipos = this.equiposTaller.length;
+          //         this.dataSource.data = this.datosEquiposTaller;
+          //       } else {
+          //         console.log("Código: " + this.resultadoPeticion.code);
+          //       }
+
+          //       this.isShowingSpinner = false;
+          //     },
+          //     error: error => {
+          //       console.error(error);
+          //     }
+          //   });
+          // }
+
+          //list all tickets from OTRS by customerID
+
+          if (this.customer != null) {
+            this.dashboardService.getTicketsByCustomer(this.customer.code).subscribe({
+              next: data => {
+                this.resultadoPeticion = data;
+                if (this.resultadoPeticion.code == 200) {
+                  this.customerTickets = this.resultadoPeticion.data;
+                  this.equiposTaller.length = 0;
+                  this.equiposTallerMenosCienDias.length = 0;
+                  this.equiposTallerMasCienDias.length = 0;
+                  this.datosDetalleEquiposTallerMasCienDias.length = 0;
+                  this.datosDetalleEquiposTallerMenosCienDias.length = 0;
+                  this.dataSourceDETMasCienDias.data.length = 0;
+                  this.dataSourceDETMenosCienDias.data.length = 0;
+
+                  this.customerTickets = this.customerTickets.filter((ti: any) => {
+                    return !ti.equipo.includes("ERROR");
+                  });
+
+                  for (let ticket of this.customerTickets) {
+
+                    this.equiposTaller.push(ticket);
+                    let diff = differenceInDays(ticket.create_time, ticket.now);
 
                     if (diff >= 100) {
                       mayor100Dias++;
-                      this.equiposTallerMasCienDias.push(equipment);
+                      this.equiposTallerMasCienDias.push(ticket);
 
                       this.datosDetalleEquiposTallerMasCienDias.push({
-                        tipo: equipment.type,
-                        marca: equipment.brand,
-                        modelo: equipment.model,
-                        serie: equipment.serial,
-                        servicio: equipment.service
+                        fechaET: ticket.create_time,
+                        equipoET: ticket.equipo,
+                        servicioET: ticket.servicio,
+                        estadoET: ticket.estado,
+                        diasET: diff,
+                        fallaET: ticket.falla
                       });
                     } else {
                       menor100Dias++;
-                      this.equiposTallerMenosCienDias.push(equipment);
+                      this.equiposTallerMenosCienDias.push(ticket);
 
                       this.datosDetalleEquiposTallerMenosCienDias.push({
-                        tipo: equipment.type,
-                        marca: equipment.brand,
-                        modelo: equipment.model,
-                        serie: equipment.serial,
-                        servicio: equipment.service
+                        fechaET: ticket.create_time,
+                        equipoET: ticket.equipo,
+                        servicioET: ticket.servicio,
+                        estadoET: ticket.estado,
+                        diasET: diff,
+                        fallaET: ticket.falla
                       });
                     }
-
                   }
+
+
+                  this.dataSourceDETMasCienDias.data = this.datosDetalleEquiposTallerMasCienDias;
+                  this.dataSourceDETMenosCienDias.data = this.datosDetalleEquiposTallerMenosCienDias;
+
+                  let etiquetasEquipos = ["Propio", "Alquilado", "Comodato", "Otros"];
+                  let datosEquipos = [propio, alquilado, comodato, otros];
+                  let tituloEquipos = "Total Equipos Electromédicos";
+                  let idEquipos = "chart-equipos";
+                  let etiquetasCertificaciones = ["Vigentes", "Pendientes", "A vencer"];
+                  let datosCertificaciones = [devCertVigentes, devCertificables - devCertVigentes, devCertPorVencer];
+                  let tituloCertificaciones = "Certificaciones";
+                  let idCertificaciones = "chart-certificaciones";
+                  let etiquetasEquiposTaller = ["Menor a 100 días", "Mayor a 100 días"];
+                  let datosEquiposTaller = [menor100Dias, mayor100Dias];
+                  let tituloEquiposTaller = "Equipos en taller";
+                  let idEquiposTaller = "chart-equipos-taller";
+                  let etiquetasPreventivos = ["Vigentes", "Pendientes", "A vencer"];
+                  let datosPreventivos = [devMantVigentes, this.equiposConMantenimiento.length - devMantVigentes, devMantPorVencer];
+                  let tituloPreventivos = "Mant. Preventivos";
+                  let idPreventivos = "chart-preventivos";
+
+                  let etiquetas = [];
+                  let datos = [];
+                  let ids = [];
+                  let titulos = [];
+
+                  etiquetas.push(etiquetasEquipos);
+                  etiquetas.push(etiquetasCertificaciones);
+                  etiquetas.push(etiquetasEquiposTaller);
+                  etiquetas.push(etiquetasPreventivos);
+                  datos.push(datosEquipos);
+                  datos.push(datosCertificaciones);
+                  datos.push(datosEquiposTaller);
+                  datos.push(datosPreventivos);
+                  titulos.push(tituloEquipos);
+                  titulos.push(tituloCertificaciones);
+                  titulos.push(tituloEquiposTaller);
+                  titulos.push(tituloPreventivos);
+                  ids.push(idEquipos);
+                  ids.push(idCertificaciones);
+                  ids.push(idEquiposTaller);
+                  ids.push(idPreventivos);
+
+                  for (let i = 0; i < 4; i++) {
+                    this.createChart(etiquetas[i], datos[i], titulos[i], ids[i]);
+                  }
+
+                } else if (this.resultadoPeticion.code == 403) {
+                  this.router.navigate(["login"])
                 }
-
-                this.dataSourceDETMasCienDias.data = this.datosDetalleEquiposTallerMasCienDias;
-                this.dataSourceDETMenosCienDias.data = this.datosDetalleEquiposTallerMenosCienDias;
-
-                let etiquetasEquipos = ["Propio", "Alquilado", "Comodato", "Otros"];
-                let datosEquipos = [propio, alquilado, comodato, otros];
-                let tituloEquipos = "Total Equipos Electromédicos";
-                let idEquipos = "chart-equipos";
-                let etiquetasCertificaciones = ["Vigentes", "Pendientes", "A vencer"];
-                let datosCertificaciones = [devCertVigentes, devCertificables - devCertVigentes, devCertPorVencer];
-                let tituloCertificaciones = "Certificaciones";
-                let idCertificaciones = "chart-certificaciones";
-                let etiquetasEquiposTaller = ["Menor a 100 días", "Mayor a 100 días"];
-                let datosEquiposTaller = [menor100Dias, mayor100Dias];
-                let tituloEquiposTaller = "Equipos en taller";
-                let idEquiposTaller = "chart-equipos-taller";
-                let etiquetasPreventivos = ["Vigentes", "Pendientes", "A vencer"];
-                let datosPreventivos = [devMantVigentes, this.equiposConMantenimiento.length - devMantVigentes, devMantPorVencer];
-                let tituloPreventivos = "Mant. Preventivos";
-                let idPreventivos = "chart-preventivos";
-
-
-                let etiquetas = [];
-                let datos = [];
-                let ids = [];
-                let titulos = [];
-
-                etiquetas.push(etiquetasEquipos);
-                etiquetas.push(etiquetasCertificaciones);
-                etiquetas.push(etiquetasEquiposTaller);
-                etiquetas.push(etiquetasPreventivos);
-                datos.push(datosEquipos);
-                datos.push(datosCertificaciones);
-                datos.push(datosEquiposTaller);
-                datos.push(datosPreventivos);
-                titulos.push(tituloEquipos);
-                titulos.push(tituloCertificaciones);
-                titulos.push(tituloEquiposTaller);
-                titulos.push(tituloPreventivos);
-                ids.push(idEquipos);
-                ids.push(idCertificaciones);
-                ids.push(idEquiposTaller);
-                ids.push(idPreventivos);
-
-                for (let i = 0; i < 4; i++) {
-                  this.createChart(etiquetas[i], datos[i], titulos[i], ids[i]);
-                }
-
-              } else if (this.resultadoPeticion.code == 403) {
-                this.router.navigate(["login"])
+              },
+              error: error => {
+                console.error(error);
               }
-            },
-            error: error => {
-              console.error(error);
-            }
 
-          });
-
+            });
+          }
         } else if (this.resultadoPeticion.code == 403) {
           this.router.navigate(["login"])
         }
@@ -439,13 +502,13 @@ export class PieChartComponent implements OnInit {
   openDialog(datos: any, tipo: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = datos;
-  
-    if(tipo === "EquiposEnTaller"){
+
+    if (tipo === "EquiposEnTaller") {
       this.dialog.open(DetalleEquiposEnTallerComponent, dialogConfig);
-    }else{
+    } else {
       this.dialog.open(DetalleEquiposEnInventarioComponent, dialogConfig);
     }
-    
+
   }
 
 }

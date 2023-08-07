@@ -13,7 +13,8 @@ export class DetalleEquiposEnTallerComponent implements OnInit {
   tipoDeEquipo: any;
   cantidadDeEquipos: any;
 
-  displayedColumnsDI: string[] = ['tipo', 'marca', 'modelo', 'serie', 'servicio'];
+  displayedColumnsDI: string[] = ['fechaET', 'equipoET', 'servicioET', 'estadoET',
+  'diasET'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.dataSourceDET.data = this.data;  
