@@ -61,6 +61,9 @@ export class PanelGeneralComponent implements OnInit {
   dataSourceMP: any;
   equipmentsArr: any;
 
+  customer: any;
+  customerTickets: any;
+
   totalDevices: number;
   equiposTaller: any[] = [];
   datosInventario: Inventario[] = [];
@@ -94,12 +97,12 @@ export class PanelGeneralComponent implements OnInit {
     this.datosEquiposTaller.length = 0;
 
     for(let eq of this.equiposTaller){
-      if(eq.services_id == element.servicioId){
+      if(eq.servicio === element.servicio){
         
-        let diasT = differenceInDays(eq.workshop_date, eq.now);
+        let diasT = differenceInDays(eq.create_time, eq.now);
 
         this.datosEquiposTaller.push({
-          equipo: eq.equipment,
+          equipo: eq.equipo,
           diasTaller: diasT         
         });
       } 
@@ -135,6 +138,45 @@ export class PanelGeneralComponent implements OnInit {
 
     //show spinner
     this.isShowingSpinner = true;
+
+    //NOTIFICA SI HAY USUARIO LOGGEADO
+    this.dataService.getCustomerNotifier().subscribe((value: Object) => {
+      if (value!=-1) {
+        this.customer = value;
+      }else{
+        this.customer = null;
+      }
+    });
+
+    //list all tickets from OTRS by customerID
+
+    if(this.customer != null){
+      this.dashboardService.getTicketsByCustomer(this.customer.code).subscribe({
+
+        next: data => {
+          this.resultadoPeticion = data;
+          if(this.resultadoPeticion.code == 200){
+            this.customerTickets = this.resultadoPeticion.data;
+            this.equiposTaller.length = 0;
+
+            this.customerTickets = this.customerTickets.filter((ti : any) => {
+              return !ti.equipo.includes("ERROR");
+            });
+
+            for(let ticket of this.customerTickets){
+              this.equiposTaller.push(ticket); 
+              let diff = differenceInDays(ticket.create_time, ticket.now);
+            }
+          }else{
+            console.log("Código: " + this.resultadoPeticion.code);
+          }
+        },
+        error: error => {
+          console.error(error);
+        }
+      });
+    }
+
     //list all devices from data base by customerID
     this.dashboardService.getServicesNumbers(this.serviceId).subscribe({
       next: data => {
@@ -145,9 +187,6 @@ export class PanelGeneralComponent implements OnInit {
 
           //get devices in taller
           for (let device of this.equipmentsArr) {
-            if (parseInt(device.workshop) > 0) {
-              this.equiposTaller.push(device);
-            }
             if (device.certificable === "Yes" || device.certificable_elec === "Yes") {
               this.equiposCertificables.push(device);
             }
@@ -170,7 +209,7 @@ export class PanelGeneralComponent implements OnInit {
 
             //get devices in taller by service
             for (let i = 0; i < this.equiposTaller.length; i++) {
-              if (parseInt(this.equiposTaller[i].services_id) == parseInt(service.services_id)) {
+              if (this.equiposTaller[i].servicio === service.service) {
                 devInTaller = devInTaller + 1;
               }
             }
