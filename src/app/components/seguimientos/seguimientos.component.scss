@@ -1,104 +1,31 @@
 .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  
-    .div-page-title {
-      width: auto;
-  
-      h2 {
-        font-size: 1.7rem;
-        color: #424242;
-      }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+
+  .div-page-title {
+    width: auto;
+
+    h2 {
+      font-size: 1.7rem;
+      color: #424242;
     }
-  
-    .div-label-total {
-      display: flex;
-      width: 100%;
-    }
-  
-    .div-button-back {
-      display: flex;
-      width: 100%;
-  
-      .button-back:hover {
-        transform: scale(1.2);
-      }
-  
-    }
-  }
-  
-  .table-container {
-    margin-top: 2rem;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  
-  
-    .div-table-mp {
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      width: 100%;
-      margin-top: 0.5rem;
-      box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
-  
-      .table-mp {
-        width: 100%;
-      }
-    }
-  
-    a {
-      text-decoration: none;
-    }
-  
-    a:hover {
-      transform: scale(1.2);
-      color: #00e5ff;
-    }
-  }
-  
-  h4{
-    padding-top: 0.55rem;
-    font-size: 1.1rem;
-  
   }
 
-  .h4-vigentes{
-    color: #81C784;
-    padding-left: 1rem;
-  }
-
-  .h4-pendientes{
-    color: #e57373;
-    padding-left: 1rem;
-  }
-  
-  .mat-header-cell {
-    text-align: center;
-    justify-content: center;
-    background: #cfd8dc;
-    font-size: 0.9rem;
-  }
-  
-  .mat-cell {
-    text-align: center;
-    justify-content: center;
-  }
-  
-  
-  .spinner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .div-label-total {
+    display: flex;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  
+
+  .div-button-back {
+    display: flex;
+    width: 100%;
+
+    .button-back:hover {
+      transform: scale(1.2);
+    }
+
+  }
+}

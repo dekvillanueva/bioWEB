@@ -1,34 +1,39 @@
-<div style="height: 88vh; width: auto;">
-  <section class="section-botones">
-
-
-
+<div class="grid-container">
+  <div class="grid-item" id="panel-general">
     <a [routerLink]="['../panel-general']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">PANEL GENERAL</button>
     </a>
-
-  </section>
-  <section class="section-botones">
+  </div>
+  <div class="grid-item" id="inventario">
     <a [routerLink]="['../inventarios']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">INVENTARIO</button>
     </a>
+  </div>
+  <div class="grid-item" id="seguimiento">
     <a [routerLink]="['../seguimientos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">SEGUIMIENTOS</button>
     </a>
+  </div>
+  <div class="grid-item" id="certificados">
     <a [routerLink]="['../certificados']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">CERTIFICADOS</button>
     </a>
-  </section>
-  <section class="section-botones">
+  </div>
+  <div class="grid-item" id="equipos-taller">
     <a [routerLink]="['../equipos-taller']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">EQUIPOS EN TALLER</button>
     </a>
+  </div>
+  <div class="grid-item" id="historia-clinica">
     <a [routerLink]="['../historial']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">HISTORIA CLÍNICA</button>
     </a>
+  </div>
+  <div class="grid-item" id="mant-preventivos">
     <a [routerLink]="['../mantenimientos-preventivos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <button mat-raised-button class="buttons-main">MANT. PREVENTIVOS</button>
     </a>
-  </section>
+  </div>
+  
   <router-outlet></router-outlet>
 </div>

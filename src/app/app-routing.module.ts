@@ -11,6 +11,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
 import { InventarioPorServicioComponent } from './components/inventario-por-servicio/inventario-por-servicio.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CambiarClaveComponent } from './components/cambiar-clave/cambiar-clave.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {path: "", redirectTo : "home", pathMatch: "full"},
@@ -24,7 +27,10 @@ const routes: Routes = [
   {path: "equipos-taller", component:EquiposTallerComponent},
   {path: "mantenimientos-preventivos", component:MantenimientosPreventivosComponent},
   {path: "select-customer", component:SelectCustomerComponent},
-  {path: "inventario-por-servicio/:id/:name", component:InventarioPorServicioComponent}
+  {path: "inventario-por-servicio/:id/:name", component:InventarioPorServicioComponent},
+  {path: "cambiar-clave", component: CambiarClaveComponent},
+  {path: "forgot-password", component: ForgotPasswordComponent},
+  {path: "**", pathMatch: 'full', component: PageNotFoundComponent }
 
 ];
 

@@ -1,40 +1,289 @@
-span {
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-  }
-
-
-.section-botones{
-    display: flex;
-    justify-content: center;
-    max-height: 150px;
-
-    a{
-        margin: 1rem;
-    }
+.grid-container {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-gap: 10px;
+  justify-content: center;
+  justify-items: center;
 }
 
+.grid-item {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
 
+  a {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
 
-.buttons-main{
+}
+
+#panel-general {
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
+
+#inventario {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  grid-column-end: 1;
+  grid-row-end: 2;
+}
+
+#seguimiento {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  grid-column-end: 2;
+  grid-row-end: 2;
+}
+
+#certificados {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  grid-column-end: 3;
+  grid-row-end: 2;
+}
+
+#equipos-taller {
+  grid-column-start: 1;
+  grid-row-start: 3;
+  grid-column-end: 1;
+  grid-row-end: 3;
+}
+
+#historia-clinica {
+  grid-column-start: 2;
+  grid-row-start: 3;
+  grid-column-end: 2;
+  grid-row-end: 3;
+}
+
+#mant-preventivos {
+  grid-column-start: 3;
+  grid-row-start: 3;
+  grid-column-end: 3;
+  grid-row-end: 3;
+}
+
+.buttons-main {
+  background-color: bisque;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  color: #424242;
+  margin: 2%;
+  max-width: 300px;
+  width: 100%;
+  height: 80px;
+}
+
+.buttons-main:hover {
+  background-color: bisque;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  transform: scale(1.1);
+  color: #424242;
+  margin: 2%;
+  max-width: 300px;
+  width: 100%;
+  height: 80px;
+}
+
+@media (min-width: 800px) and (max-width: 960px) {
+
+  .grid-container {
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+    grid-gap: 10px;
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .grid-item {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+
+    a {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+  }
+
+  #panel-general {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 1;
+  }
+
+  #inventario {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-column-end: 3;
+    grid-row-end: 2;
+  }
+
+  #seguimiento {
+    grid-column-start: 3;
+    grid-row-start: 2;
+    grid-column-end: 5;
+    grid-row-end: 2;
+  }
+
+  #certificados {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-column-end: 3;
+    grid-row-end: 3;
+  }
+
+  #equipos-taller {
+    grid-column-start: 3;
+    grid-row-start: 3;
+    grid-column-end: 5;
+    grid-row-end: 3;
+  }
+
+  #historia-clinica {
+    grid-column-start: 1;
+    grid-row-start: 4;
+    grid-column-end: 3;
+    grid-row-end: 4;
+  }
+
+  #mant-preventivos {
+    grid-column-start: 3;
+    grid-row-start: 4;
+    grid-column-end: 5;
+    grid-row-end: 4;
+  }
+
+  .buttons-main {
     background-color: bisque;
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
     color: #424242;
     margin: 2%;
-    max-width: 250px;
-    width: 250px;
+    max-width: 300px;
+    width: 100%;
     height: 80px;
-}
+  }
 
-.buttons-main:hover{
+  .buttons-main:hover {
     background-color: bisque;
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
     transform: scale(1.1);
-    color: #424242;;
+    color: #424242;
     margin: 2%;
-    max-width: 250px;
-    width: 250px;
+    max-width: 300px;
+    width: 100%;
     height: 80px;
+  }
 }
-  
+
+@media (min-width: 250px) and (max-width: 800px) {
+
+  .grid-container {
+    display: grid;
+    grid-template: repeat(7, 1fr) / repeat(1, 1fr);
+    grid-gap: 10px;
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .grid-item {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+
+    a {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+  }
+
+  #panel-general {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
+  }
+
+  #inventario {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-column-end: 1;
+    grid-row-end: 2;
+  }
+
+  #seguimiento {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-column-end: 1;
+    grid-row-end: 3;
+  }
+
+  #certificados {
+    grid-column-start: 1;
+    grid-row-start: 4;
+    grid-column-end: 1;
+    grid-row-end: 4;
+  }
+
+  #equipos-taller {
+    grid-column-start: 1;
+    grid-row-start: 5;
+    grid-column-end: 1;
+    grid-row-end: 5;
+  }
+
+  #historia-clinica {
+    grid-column-start: 1;
+    grid-row-start: 6;
+    grid-column-end: 1;
+    grid-row-end: 6;
+  }
+
+  #mant-preventivos {
+    grid-column-start: 1;
+    grid-row-start: 7;
+    grid-column-end: 1;
+    grid-row-end: 7;
+  }
+
+  .buttons-main {
+    background-color: bisque;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    color: #424242;
+    margin: 2%;
+    max-width: 300px;
+    width: 100%;
+    height: 80px;
+  }
+
+  .buttons-main:hover {
+    background-color: bisque;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    transform: scale(1.1);
+    color: #424242;
+    margin: 2%;
+    max-width: 300px;
+    width: 100%;
+    height: 80px;
+  }
+
+}

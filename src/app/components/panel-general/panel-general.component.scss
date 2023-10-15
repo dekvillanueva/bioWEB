@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .div-page-title {
     width: auto;
@@ -33,7 +34,21 @@
 
 }
 
+.spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .table-container {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -42,25 +57,25 @@
   position: relative;
 }
 
-.spinner-container{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .div-table-inventario {
+
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // width: 33%;
+  // min-width: 350px;
+  // background-color: #CFD8DC;
+  // box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 
   display: flex;
   flex-direction: column;
+  align-content: center;
   align-items: center;
   width: 33%;
   min-width: 350px;
+  max-height: calc(100vh - 10.25rem);
+  overflow: auto;
+  margin-top: 0.5rem;
   background-color: #CFD8DC;
   box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 
@@ -73,9 +88,9 @@
       width: 60% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -89,9 +104,9 @@
       width: 20% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -105,9 +120,9 @@
       width: 20% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -115,6 +130,7 @@
     }
 
     width: 100%;
+
     td,
     th {
       text-align: left !important;
@@ -123,6 +139,7 @@
 
     white-space: normal;
     word-wrap: break-word;
+
     .mat-sort-header-container {
       justify-content: center !important;
     }
@@ -131,11 +148,23 @@
 
 
 .div-table-certificaciones {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // width: 33%;
+  // min-width: 350px;
+  // background-color: #9FA8DA;
+  // box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+
   display: flex;
   flex-direction: column;
+  align-content: center;
   align-items: center;
   width: 33%;
   min-width: 350px;
+  max-height: calc(100vh - 10.25rem);
+  overflow: auto;
+  margin-top: 0.5rem;
   background-color: #9FA8DA;
   box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 
@@ -148,9 +177,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -164,9 +193,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -180,9 +209,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -196,9 +225,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -206,13 +235,16 @@
     }
 
     width: 100%;
+
     td,
     th {
       text-align: center !important;
       vertical-align: middle !important;
     }
+
     white-space: normal;
     word-wrap: break-word;
+
     .mat-sort-header-container {
       justify-content: center !important;
     }
@@ -220,11 +252,23 @@
 }
 
 .div-table-mantenimientos-preventivos {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // width: 33%;
+  // min-width: 350px;
+  // background-color: #81C784;
+  // box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+
   display: flex;
   flex-direction: column;
+  align-content: center;
   align-items: center;
   width: 33%;
   min-width: 350px;
+  max-height: calc(100vh - 10.25rem);
+  overflow: auto;
+  margin-top: 0.5rem;
   background-color: #81C784;
   box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 
@@ -237,9 +281,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -253,9 +297,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -269,9 +313,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -285,9 +329,9 @@
       width: 25% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-    
+
       word-break: break-word;
-    
+
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
@@ -296,11 +340,13 @@
 
 
     width: 100%;
+
     td,
     th {
       text-align: center !important;
       vertical-align: middle !important;
     }
+
     white-space: normal;
     word-wrap: break-word;
 
@@ -322,7 +368,8 @@ a {
   transition: transform 300ms;
 }
 
-a:hover, a:hover span {
+a:hover,
+a:hover span {
   transform: scale(1.2);
   color: #00e5ff;
   cursor: pointer;
@@ -337,5 +384,5 @@ a:hover, a:hover span {
 
 .mat-cell {
   text-align: center;
-  justify-content:center;
+  justify-content: center;
 }

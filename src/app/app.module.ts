@@ -52,6 +52,9 @@ import { DetalleEquiposTallerComponent } from './components/detalle-equipos-tall
 import { DetalleMantenimientosPreventivosComponent } from './components/detalle-mantenimientos-preventivos/detalle-mantenimientos-preventivos.component';
 import { DetalleEquiposEnTallerComponent } from './components/detalle-equipos-en-taller/detalle-equipos-en-taller.component';
 import { DetalleEquiposEnInventarioComponent } from './components/detalle-equipos-en-inventario/detalle-equipos-en-inventario.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CambiarClaveComponent } from './components/cambiar-clave/cambiar-clave.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 
@@ -81,7 +84,10 @@ import { DetalleEquiposEnInventarioComponent } from './components/detalle-equipo
     DetalleEquiposTallerComponent,
     DetalleMantenimientosPreventivosComponent,
     DetalleEquiposEnTallerComponent,
-    DetalleEquiposEnInventarioComponent
+    DetalleEquiposEnInventarioComponent,
+    PageNotFoundComponent,
+    CambiarClaveComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

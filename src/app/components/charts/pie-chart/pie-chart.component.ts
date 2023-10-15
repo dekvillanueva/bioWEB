@@ -177,9 +177,12 @@ export class PieChartComponent implements OnInit {
     //show spinner
     this.isShowingSpinner = true;
 
+
+
     this.dashboardService.getServicesNumbers(this.serviceId).subscribe({
       next: data => {
         this.resultadoPeticion = data;
+
         if (this.resultadoPeticion.code == 200) {
           this.equipmentsArr = this.resultadoPeticion.detail;
 
@@ -385,7 +388,8 @@ export class PieChartComponent implements OnInit {
             this.dashboardService.getTicketsByCustomer(this.customer.code).subscribe({
               next: data => {
                 this.resultadoPeticion = data;
-                if (this.resultadoPeticion.code == 200) {
+
+                if (this.resultadoPeticion.code == 200 || this.resultadoPeticion.code == 205) {
                   this.customerTickets = this.resultadoPeticion.data;
                   this.equiposTaller.length = 0;
                   this.equiposTallerMenosCienDias.length = 0;
@@ -395,39 +399,41 @@ export class PieChartComponent implements OnInit {
                   this.dataSourceDETMasCienDias.data.length = 0;
                   this.dataSourceDETMenosCienDias.data.length = 0;
 
-                  this.customerTickets = this.customerTickets.filter((ti: any) => {
-                    return !ti.equipo.includes("ERROR");
-                  });
+                  if (this.customerTickets != null) {
+                    this.customerTickets = this.customerTickets.filter((ti: any) => {
+                      return !ti.equipo.includes("ERROR");
+                    });
 
-                  for (let ticket of this.customerTickets) {
+                    for (let ticket of this.customerTickets) {
 
-                    this.equiposTaller.push(ticket);
-                    let diff = differenceInDays(ticket.create_time, ticket.now);
+                      this.equiposTaller.push(ticket);
+                      let diff = differenceInDays(ticket.create_time, ticket.now);
 
-                    if (diff >= 100) {
-                      mayor100Dias++;
-                      this.equiposTallerMasCienDias.push(ticket);
+                      if (diff >= 100) {
+                        mayor100Dias++;
+                        this.equiposTallerMasCienDias.push(ticket);
 
-                      this.datosDetalleEquiposTallerMasCienDias.push({
-                        fechaET: ticket.create_time,
-                        equipoET: ticket.equipo,
-                        servicioET: ticket.servicio,
-                        estadoET: ticket.estado,
-                        diasET: diff,
-                        fallaET: ticket.falla
-                      });
-                    } else {
-                      menor100Dias++;
-                      this.equiposTallerMenosCienDias.push(ticket);
+                        this.datosDetalleEquiposTallerMasCienDias.push({
+                          fechaET: ticket.create_time,
+                          equipoET: ticket.equipo,
+                          servicioET: ticket.servicio,
+                          estadoET: ticket.estado,
+                          diasET: diff,
+                          fallaET: ticket.falla
+                        });
+                      } else {
+                        menor100Dias++;
+                        this.equiposTallerMenosCienDias.push(ticket);
 
-                      this.datosDetalleEquiposTallerMenosCienDias.push({
-                        fechaET: ticket.create_time,
-                        equipoET: ticket.equipo,
-                        servicioET: ticket.servicio,
-                        estadoET: ticket.estado,
-                        diasET: diff,
-                        fallaET: ticket.falla
-                      });
+                        this.datosDetalleEquiposTallerMenosCienDias.push({
+                          fechaET: ticket.create_time,
+                          equipoET: ticket.equipo,
+                          servicioET: ticket.servicio,
+                          estadoET: ticket.estado,
+                          diasET: diff,
+                          fallaET: ticket.falla
+                        });
+                      }
                     }
                   }
 
@@ -480,6 +486,8 @@ export class PieChartComponent implements OnInit {
 
                 } else if (this.resultadoPeticion.code == 403) {
                   this.router.navigate(["login"])
+                } else if (this.resultadoPeticion.code == 205) {
+                  console.log(this.resultadoPeticion);
                 }
               },
               error: error => {

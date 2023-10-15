@@ -69,7 +69,7 @@
       <!--TABLE CERTIFICACIONES-->
       <table mat-table [dataSource]="dataSourceC" class="mat-elevation-z8 table-certificaciones">
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsC"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsC; sticky: true"></tr>
         <tr mat-row *matRowDef= "let row; columns: displayedColumnsC;" (click)="selectedRow(row)"></tr>
 
         <!-- TotalC Column -->
@@ -113,7 +113,7 @@
       <!--TABLE MANTENIMIENTOS PREVENTIVOS-->
       <table mat-table [dataSource]="dataSourceMP" class="mat-elevation-z8 table-mantenimientos-preventivos">
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsMP"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsMP; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsMP;"></tr>
         <!-- TotalP Column -->
         <ng-container matColumnDef="totalP">

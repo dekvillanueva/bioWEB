@@ -1,0 +1,23 @@
+.mat-card-title {
+    font-size: 3.8rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.mat-card-subtitle{
+    font-size: 1.0rem;
+    padding-top: 0.5rem;
+}
+
+.mat-card-actions{
+    display: flex;
+    justify-content: center;
+}
+
+.card-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}

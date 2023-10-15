@@ -44,6 +44,7 @@
 
 .table-container {
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -56,7 +57,7 @@
     flex-direction: column;
     align-content: center;
     width: 80%;
-    max-height: 700px;
+    max-height: calc(100vh - 10.25rem);
     overflow: auto;
     margin-top: 0.5rem;
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
