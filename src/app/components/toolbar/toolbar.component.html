@@ -2,15 +2,30 @@
   <div class="toolbar-img">
     <img class="toolbar-img-logo" src="assets/img/logoBiotrust.jpg">
   </div>
-  <div class="toolbar-img"  *ngIf="customerImage">
+  <div class="toolbar-img" *ngIf="customerImage">
     <img class="toolbar-img-logo" src="{{apiUrl + customerImage.image}}">
   </div>
   <!-- <div class="toolbar-img"  *ngIf="customerImage && customerImage.id == 34">
     <img class="toolbar-img-logo" src="assets/img/LogoMaterDei.png">
   </div> -->
   <div class="toolbar-mat-button">
-    <button mat-mini-fab color="primary" [disabled]="!isLogged" (click)="openDialog()">
+    <button mat-mini-fab color="primary" [disabled]="!isLogged" (click)="openDialog()" cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin">
       <mat-icon>person</mat-icon>
     </button>
   </div>
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="overlayOpened"
+    cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop" [cdkConnectedOverlayHasBackdrop]="true"
+    (detach)="overlayOpened = false" (backdropClick)="overlayOpened = false">
+    <div class="overlay user-overlay overlay-fall">
+      <ul (click)="userOverlayClick($event)">
+        <li *ngFor="let item of userMenuData" cdkMenuItem>
+          <a>
+            <i class="icon" [ngClass]="item.icon" id={{item.text}}></i>
+            <span id={{item.text}}>{{item.text}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
 </div>

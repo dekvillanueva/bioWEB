@@ -1,53 +1,53 @@
 <div class="login-outer-countainer">
-    <mat-card class="login-inner-countainer">
-      <mat-card-header class="login-title">
-        <mat-card-title>Cambiar Contraseña</mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="login-field-container">
-        <form [formGroup]="changePassForm" autocomplete="off" novalidate (ngSubmit)="submitLoginForm(changePassForm.value)"
-          fxLayout="column wrap">
-          <mat-form-field appearance="outline">
-            <mat-label>Contraseña actual</mat-label>
-            <input matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password" minlength="6"
-              required />
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="hasError('password', 'required')">Requerido</mat-error>
-            <mat-error *ngIf="hasError('password', 'minlength')">Contraseña no válida</mat-error>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline">
-            <mat-label>Nueva contraseña </mat-label>
-            <input matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password" minlength="6"
-              required />
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="hasError('password', 'required')">Requerido</mat-error>
-            <mat-error *ngIf="hasError('password', 'minlength')">Contraseña no válida</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Repetir nueva contraseña </mat-label>
-            <input matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password" minlength="6"
-              required />
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="hasError('password', 'required')">Requerido</mat-error>
-            <mat-error *ngIf="hasError('password', 'minlength')">Contraseña no válida</mat-error>
-          </mat-form-field>
-  
-          <button mat-raised-button color="primary" (click)="buttonChangePassAction" class="login-btn"
-            [disabled]="!changePassForm.valid">
-            Cambiar Contraseña
+  <mat-card class="login-inner-countainer">
+    <mat-card-header class="login-title">
+      <mat-card-title>Cambiar Contraseña</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="login-field-container">
+      <form [formGroup]="changePassForm" autocomplete="off" novalidate
+        (ngSubmit)="submitLoginForm(changePassForm.value)" fxLayout="column wrap">
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña actual</mat-label>
+          <input matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password" minlength="6"
+            required />
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
+          <mat-error *ngIf="hasError('password', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">Contraseña no válida, menor a 6 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nueva contraseña </mat-label>
+          <input matInput [type]="hide ? 'text' : 'password'" formControlName="newPassword" id="newPassword"
+            minlength="6" required />
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="hasError('newPassword', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('newPassword', 'minlength')">Contraseña no válida, menor a 6 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Repetir nueva contraseña </mat-label>
+          <input matInput [type]="hide ? 'text' : 'password'" formControlName="repeatNewPassword" id="repeatNewPassword"
+            required />
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="hasError('repeatNewPassword', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('repeatNewPassword', 'passwordMismatch')">Las contraseñas NO coinciden </mat-error>
+          <mat-error *ngIf="hasError('repeatNewPassword', 'apiErr')">Error. Contraseñas No válidas! </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="buttonChangePassAction" class="login-btn"
+          [disabled]="!changePassForm.valid">
+          Cambiar Contraseña
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

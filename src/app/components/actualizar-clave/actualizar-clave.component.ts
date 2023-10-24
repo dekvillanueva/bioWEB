@@ -1,37 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { UserService } from 'src/app/services/user.service';
+import { FormControl, FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ValidatorService } from 'src/app/services/validator.service';
+import { UserService } from 'src/app/services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CambiarClaveDialogComponent } from '../cambiar-clave-dialog/cambiar-clave-dialog.component';
+import { ActualizarClaveDialogComponent } from '../actualizar-clave-dialog/actualizar-clave-dialog.component';
+
 
 @Component({
-  selector: 'app-cambiar-clave',
-  templateUrl: './cambiar-clave.component.html',
-  styleUrls: ['./cambiar-clave.component.scss'],
+  selector: 'app-actualizar-clave',
+  templateUrl: './actualizar-clave.component.html',
+  styleUrls: ['./actualizar-clave.component.scss'],
   providers: [ValidatorService]
 })
-export class CambiarClaveComponent implements OnInit {
+export class ActualizarClaveComponent implements OnInit {
 
-  public changePassForm: FormGroup;  
-
-  resultadoPeticion: any;
+  changePassForm!: FormGroup;
   hide: any;
+  user: any;
+  resultadoPeticion: any;
 
-  constructor(private v: ValidatorService, private userService: UserService, 
-    private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private v: ValidatorService, private userService: UserService,
+              public dialog: MatDialog) { }
 
+  ngOnInit(): void {
     this.changePassForm = new FormGroup(
       {
-        password: new FormControl("", [Validators.required]),
-        newPassword: new FormControl("", [Validators.required, Validators.minLength(6)]),
-        repeatNewPassword: new FormControl("", [Validators.required])
+        newPassword: new FormControl('', [Validators.required]),
+        repeatNewPassword: new FormControl('', [Validators.required]),
       },
       { validators: this.v.passwordMatch('newPassword', 'repeatNewPassword') }
     );
-  }
-
-  ngOnInit(): void {
   }
 
   // function call on submit login form
@@ -48,24 +46,21 @@ export class CambiarClaveComponent implements OnInit {
 
   //function post API for user login
   buttonChangePassAction() {
-
-    const password = this.changePassForm.get('password');
-    const newPassword = this.changePassForm.get('newPassword');
-    const repeatNewPassword = this.changePassForm.get('repeatNewPassword');
+    const password = this.changePassForm.get('newPassword');
+    const repeatPassword = this.changePassForm.get('repeatNewPassword');
     let user =
     {
       userPassword: password?.value,
-      userNewPassword: newPassword?.value,
-      userNewPassword2: repeatNewPassword?.value
+      userPassword2: repeatPassword?.value
     }
 
-    this.userService.changeUserPassword(user)
+    this.userService.changeUserPasswordLogin(user)
       .subscribe({
         next: data => {
           this.resultadoPeticion = data;
           if (this.resultadoPeticion.code == 200) {
             const dialogConfig = new MatDialogConfig();
-            this.dialog.open(CambiarClaveDialogComponent, dialogConfig);
+            this.dialog.open(ActualizarClaveDialogComponent, dialogConfig);
           } else if (this.resultadoPeticion.code == 409) {
             this.changePassForm.get('repeatNewPassword')?.setErrors({ apiErr: true });
           } else {
@@ -76,5 +71,7 @@ export class CambiarClaveComponent implements OnInit {
           console.error(error);
         }
       });
+
   }
+
 }

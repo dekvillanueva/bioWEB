@@ -1,0 +1,68 @@
+body {
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 30px;
+  }
+  
+  .version-info {
+    font-size: 8pt;
+    float: right;
+    margin: 8px;
+  }
+  
+  mat-error {
+    float: right;
+  }
+  
+  .login-outer-countainer .login-inner-countainer {
+    max-width: 350px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    animation-name: slidein;
+    animation-duration: 0.7s;
+    display: block;
+  }
+  
+  @keyframes slidein {
+    0% {
+      margin-left: 1500px;
+    }
+    100% {
+      margin-left: 0px;
+    }
+  }
+  
+  .login-title {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .login-title mat-card-title {
+    font-size: 1.50rem;
+  }
+  
+  .login-field-container {
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  .login-field-container mat-form-field {
+    width: 100%;
+    margin: -4px 0;
+  }
+  
+  .login-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 15px;
+    letter-spacing: 0.7px;
+  }
+  
+  .register-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }

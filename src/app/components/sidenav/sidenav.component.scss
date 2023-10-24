@@ -115,14 +115,24 @@
 
 .side-footer {
     display: flex;
-    flex-direction: column;
+    max-height: 50px;
+    flex-direction: row;
+    gap: 0.3rem;
     align-items: center;
     justify-content: flex-end;
     z-index: 2;
     translate: -3rem;
     position: fixed;
     bottom: 0;
-    background-color: #263238;
+    background-color: transparent;
     color: #706c6c;
+
+    #p1{
+        font-size: 0.55rem;
+    }
+
+    #p2{
+        font-size: 0.75rem;
+    }
 }
 

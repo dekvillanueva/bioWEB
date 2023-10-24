@@ -32,11 +32,12 @@ export class SelectCustomerComponent implements OnInit {
     this.userService.getUserCustomers().subscribe({
       next: data => {
         this.resultadoPeticion = data;
-        if(this.resultadoPeticion.code == 200){
+
+        if(this.resultadoPeticion.code == 200 || this.resultadoPeticion.code == 205){
           this.customers = this.resultadoPeticion.data;
         
         }else{
-          this.router.navigate(["login"]); //CHECK IF USER IS STILL LOGGED
+          this.router.navigate(["login"]); 
         }
       },
       error: error =>{

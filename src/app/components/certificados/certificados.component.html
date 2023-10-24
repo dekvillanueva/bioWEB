@@ -29,7 +29,7 @@
       </mat-form-field>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-mp">
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         <!-- Servicio Column -->

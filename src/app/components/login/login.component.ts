@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -60,13 +59,12 @@ export class LoginComponent implements OnInit {
             this.cookieService.set("company", this.resultadoPeticion.data.company);
 						
             this.userLogged = this.resultadoPeticion.data;
-
             this.notifyForChange();
 
             if (this.resultadoPeticion.data.firstlogin != 0) {
               this.router.navigate(["select-customer"])
             } else {
-              this.router.navigate(["change-password"]);
+              this.router.navigate(["actualizar-clave"]);
             }
           } else {
             alert(this.resultadoPeticion.description);
@@ -98,7 +96,7 @@ export class LoginComponent implements OnInit {
 
   //
   forgotPassword(){
-    console.log("forgot password");
+    this.router.navigate(["forgot-password"]);
   }
   
 }

@@ -34,6 +34,7 @@ export class LogoutDialogComponent implements OnInit {
     this.cookiesService.delete('token');
     this.cookiesService.delete('idp');
     this.cookiesService.delete('idc');
+    this.cookiesService.delete('uid');
     this.cookiesService.delete('company');
 
     this.dataService.setUserNotifier(-1);

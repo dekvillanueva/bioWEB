@@ -37,6 +37,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 //services
 import { UserService } from './services/user.service';
@@ -55,6 +56,10 @@ import { DetalleEquiposEnInventarioComponent } from './components/detalle-equipo
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CambiarClaveComponent } from './components/cambiar-clave/cambiar-clave.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ActualizarClaveComponent } from './components/actualizar-clave/actualizar-clave.component';
+import { ActualizarClaveDialogComponent } from './components/actualizar-clave-dialog/actualizar-clave-dialog.component';
+import { ForgotPasswordDialogComponent } from './components/forgot-password-dialog/forgot-password-dialog.component';
+import { CambiarClaveDialogComponent } from './components/cambiar-clave-dialog/cambiar-clave-dialog.component';
 
 
 
@@ -87,7 +92,11 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     DetalleEquiposEnInventarioComponent,
     PageNotFoundComponent,
     CambiarClaveComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ActualizarClaveComponent,
+    ActualizarClaveDialogComponent,
+    ForgotPasswordDialogComponent,
+    CambiarClaveDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +118,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     MatDialogModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    OverlayModule
   ],
   providers: [UserService, CookieService, DataService, DashboardService],
   bootstrap: [AppComponent],

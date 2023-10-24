@@ -14,6 +14,7 @@ import { InventarioPorServicioComponent } from './components/inventario-por-serv
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CambiarClaveComponent } from './components/cambiar-clave/cambiar-clave.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ActualizarClaveComponent } from './components/actualizar-clave/actualizar-clave.component';
 
 const routes: Routes = [
   {path: "", redirectTo : "home", pathMatch: "full"},
@@ -30,8 +31,9 @@ const routes: Routes = [
   {path: "inventario-por-servicio/:id/:name", component:InventarioPorServicioComponent},
   {path: "cambiar-clave", component: CambiarClaveComponent},
   {path: "forgot-password", component: ForgotPasswordComponent},
+  {path: "actualizar-clave", component: ActualizarClaveComponent},
   {path: "**", pathMatch: 'full', component: PageNotFoundComponent }
-
+  
 ];
 
 @NgModule({
