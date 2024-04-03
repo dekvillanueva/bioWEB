@@ -13,6 +13,7 @@ export interface Inventario {
   riesgo: string;
   tipo: string;
   total: number;
+  serviceId: string;
 }
 
 export interface DetalleInventario {
@@ -62,13 +63,17 @@ export class InventarioPorServicioComponent implements OnInit {
   selectedRow(row: any) {
     this.rowSelected = row;
 
-    this.dashboardService.getEquipmentsByType(this.rowSelected.deviceTypeId).subscribe({
+    this.dashboardService.getUserEquipments().subscribe({
       next: data => {
         this.resultadoPeticion = data;
+
         if (this.resultadoPeticion.code == 200) {
           this.datosDetalleInventario.length = 0;
           this.dataSourceDI.data.length = 0;
           this.equiposPorTipo = this.resultadoPeticion.data;
+
+          this.equiposPorTipo = this.equiposPorTipo.filter((eq: any) => (eq.type===row.tipo)&&(eq.services_id===row.serviceId))
+          
           for(let equipo of this.equiposPorTipo){
             this.datosDetalleInventario.push({
               tipo: equipo.type,
@@ -115,6 +120,7 @@ export class InventarioPorServicioComponent implements OnInit {
       if(params.get('name') != null){
         this.servicio = params.get('name')!;
         this.serviceId = params.get('id');
+        console.log(this.serviceId);
       }else{
         this.servicio = '';
         this.serviceId = -1;
@@ -126,13 +132,15 @@ export class InventarioPorServicioComponent implements OnInit {
           this.resultadoPeticion = data;
           if (this.resultadoPeticion.code == 200) {
             this.devicesByType = this.resultadoPeticion.data;
+
             this.totalDeEquipos = 0;
             for (let device of this.devicesByType) {
               this.datosInventario.push({
                 deviceTypeId: device.equipment_types_id,
                 riesgo: device.class,
                 tipo: device.name,
-                total: device.count
+                total: device.count,
+                serviceId: this.serviceId
               })
               this.totalDeEquipos = this.totalDeEquipos + parseInt(device.count);
             }
@@ -149,5 +157,6 @@ export class InventarioPorServicioComponent implements OnInit {
 
 
   }
+
 
 }

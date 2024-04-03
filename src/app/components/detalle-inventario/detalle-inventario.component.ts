@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
+
 @Component({
   selector: 'app-detalle-inventario',
   templateUrl: './detalle-inventario.component.html',

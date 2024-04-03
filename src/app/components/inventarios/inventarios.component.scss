@@ -40,7 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 10;
 }
 
 .table-container {
@@ -57,7 +57,7 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 80%;
+    width: 100%;
     max-height: calc(100vh - 3.25rem);
     overflow: auto;
     margin-top: 0.5rem;

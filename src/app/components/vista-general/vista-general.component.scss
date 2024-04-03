@@ -1,0 +1,303 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    .div-page-title {
+      width: auto;
+  
+      h2 {
+        font-size: 1.7rem;
+        color: #424242;
+      }
+    }
+  
+    .div-label-total {
+      display: flex;
+      width: 100%;
+      justify-content: left;
+      align-items: center;
+  
+      h4 {
+        margin-left: 20px;
+        font-size: 1.3rem;
+      }
+  
+      a {
+        margin-left: 20px;
+        font-size: 1.8rem;
+        padding-bottom: 0.5rem;
+      }
+  
+    }
+  
+  }
+  
+  .spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  
+  .table-container {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    position: relative;
+  }
+  
+  .div-table-inventario {
+  
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // width: 33%;
+    // min-width: 350px;
+    // background-color: #CFD8DC;
+    // box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 100%;
+    max-height: calc(100vh - 10.25rem);
+    overflow: auto;
+    margin-top: 0.5rem;
+    background-color: #CFD8DC;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  
+    .table-inventario {
+  
+      .mat-column-servicio {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 20% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-inventario {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 6% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-taller {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 6% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+
+      .mat-column-totalC {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-vigenteC {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-pendienteC {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-vencimientoC {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+
+      .mat-column-totalP {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-vigenteP {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-pendienteP {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+  
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      .mat-column-vencimientoP {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        flex: 0 0 8% !important;
+        width: 8% !important;
+        overflow-wrap: break-word;
+        text-align: right !important;
+        word-break: break-word;
+  
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+      width: 100%;
+  
+      td{
+        text-align: left !important;
+        vertical-align: middle !important;
+        font-size: 0.70rem;
+      }
+      th {
+        text-align: left !important;
+        vertical-align: middle !important;
+        font-size: 0.70rem;
+      }
+  
+      white-space: normal;
+      word-wrap: break-word;
+  
+      .mat-sort-header-container {
+        justify-content: center !important;
+      }
+    }
+  }
+  
+  
+  
+  h4 {
+    display: flex;
+    padding-top: 0.55rem;
+    font-size: 1.1rem;
+  }
+  
+  a {
+    display: flex;
+    text-decoration: none;
+    transition: transform 300ms;
+  }
+  
+  a:hover,
+  a:hover span {
+    transform: scale(1.2);
+    color: #00e5ff;
+    cursor: pointer;
+  }
+  
+  

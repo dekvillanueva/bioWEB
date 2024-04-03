@@ -9,7 +9,7 @@
   
       <mat-form-field appearance="standard" class="filter-field">
         <mat-label>Buscar...</mat-label>
-        <input matInput (keyup)="applyFilterI($event)" placeholder="marca, modelo" #input>
+        <input matInput (keyup)="applyFilterI($event)" placeholder="marca, modelo, serie" #input>
       </mat-form-field>
   
       <table mat-table [dataSource]="dataSourceDI" class="mat-elevation-z8 table-inventario">

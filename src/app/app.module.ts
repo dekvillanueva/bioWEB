@@ -60,6 +60,7 @@ import { ActualizarClaveComponent } from './components/actualizar-clave/actualiz
 import { ActualizarClaveDialogComponent } from './components/actualizar-clave-dialog/actualizar-clave-dialog.component';
 import { ForgotPasswordDialogComponent } from './components/forgot-password-dialog/forgot-password-dialog.component';
 import { CambiarClaveDialogComponent } from './components/cambiar-clave-dialog/cambiar-clave-dialog.component';
+import { VistaGeneralComponent } from './components/vista-general/vista-general.component';
 
 
 
@@ -96,7 +97,8 @@ import { CambiarClaveDialogComponent } from './components/cambiar-clave-dialog/c
     ActualizarClaveComponent,
     ActualizarClaveDialogComponent,
     ForgotPasswordDialogComponent,
-    CambiarClaveDialogComponent
+    CambiarClaveDialogComponent,
+    VistaGeneralComponent
   ],
   imports: [
     BrowserModule,

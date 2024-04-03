@@ -75,6 +75,7 @@ export class InventariosComponent implements OnInit {
         this.resultadoPeticion = data;
         if (this.resultadoPeticion.code == 200) {
           this.services = this.resultadoPeticion.data;
+
           this.equipmentsArr = this.resultadoPeticion.detail;
 
           this.dashboardService.getEquipmentsByType(this.rowSelected.deviceTypeId).subscribe({
@@ -162,6 +163,7 @@ export class InventariosComponent implements OnInit {
         this.resultadoPeticion = data;
         if (this.resultadoPeticion.code == 200) {
           this.devicesByType = this.resultadoPeticion.data;
+
           this.totalDeEquipos = 0;
           for (let device of this.devicesByType) {
             this.datosInventario.push({
@@ -172,7 +174,6 @@ export class InventariosComponent implements OnInit {
             this.totalDeEquipos = this.totalDeEquipos + parseInt(device.count);
           }
 
-          console.log(this.datosInventario);
           this.dataSourceI.data = this.datosInventario;
           this.isShowingSpinner = false;
         }

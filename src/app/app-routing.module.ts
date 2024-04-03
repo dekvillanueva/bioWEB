@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { CambiarClaveComponent } from './components/cambiar-clave/cambiar-clave.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ActualizarClaveComponent } from './components/actualizar-clave/actualizar-clave.component';
+import { VistaGeneralComponent } from './components/vista-general/vista-general.component';
 
 const routes: Routes = [
   {path: "", redirectTo : "home", pathMatch: "full"},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: "cambiar-clave", component: CambiarClaveComponent},
   {path: "forgot-password", component: ForgotPasswordComponent},
   {path: "actualizar-clave", component: ActualizarClaveComponent},
+  {path: "vista-general", component: VistaGeneralComponent},
   {path: "**", pathMatch: 'full', component: PageNotFoundComponent }
   
 ];

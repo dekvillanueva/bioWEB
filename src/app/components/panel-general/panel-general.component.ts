@@ -11,10 +11,6 @@ import { Router } from '@angular/router';
 
 
 
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
-}
-
 export interface Inventario {
   servicioId: number;
   servicio: string;
@@ -162,6 +158,7 @@ export class PanelGeneralComponent implements OnInit {
             this.dashboardService.getServicesNumbers(this.serviceId).subscribe({
               next: data => {
                 this.resultadoPeticion = data;
+
                 if (this.resultadoPeticion.code == 200) {
                   this.services = this.resultadoPeticion.data;
                   this.equipmentsArr = this.resultadoPeticion.detail;
